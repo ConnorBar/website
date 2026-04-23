@@ -10,28 +10,43 @@ export const metadata: Metadata = {
 const awards = [
   {
     title: "Inducted to National Collegiate Chinese Honor Society",
-    org: "NCCHS",
-    year: "2026",
+    org: "CLTA NCCHS - 大学中文荣誉生协会",
+    year: "2026-04",
   },
   {
-    title: "first place in 400 level chinese speaking divison",
-    org: "Purdue Chinese Department",
-    year: "2026",
+    title: "First place in 400 level chinese speaking divison",
+    org: "Purdue Chinese Speech & Performance Contest",
+    year: "2026-03",
   },
   {
-    title: "MC'ed a chinese speaking comp (50+ attendees)",
-    org: "Purdue Chinese Department",
-    year: "2026",
+    title: "Was Host for a chinese speaking comp (50+ attendees)",
+    org: "Purdue Chinese Speech & Performance Contest",
+    year: "2026-03",
   },
-  // {
-  //   title: "Placement exam: ",
-  //   org: "",
-  //   year: "2023",
-  // },
+  {
+    title: "Visited Taiwan again",
+    org: "",
+    year: "2025-12",
+  },
+  {
+    title: "Placement exam: (听力) Intermediate High (阅读) Advanced Low",
+    org: "TOCFL Speedy Screening",
+    year: "2025-11",
+  },
+  {
+    title: "Taiwan Study Abroad",
+    org: "Purdue Chinese Department",
+    year: "2024-05",
+  },
+  {
+    title: "Placement exam: (听力) Novice Mid (阅读) Intermediate Low",
+    org: "TOCFL Speedy Screening",
+    year: "2024-03",
+  },
   {
     title: "Started studying!",
     org: "",
-    year: "2023",
+    year: "2023-08",
   },
 ];
 
@@ -61,10 +76,10 @@ const experience = [
 
 const now = [
   "Finishing my Data Science degree",
-  "Studying for HSK 5 (Mandarin proficiency exam)",
+  "Looking for positions in Boston",
   "Building this site",
-  "Planning a trip to Chengdu and Chongqing",
-  "Reading: 《狂人日記》和",
+  "Studying for HSK 5 (Mandarin proficiency exam)",
+  "Reading: 《狂人日記》",
 ];
 
 export default function AboutPage() {
@@ -232,11 +247,11 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-2">
               <a
-                href="mailto:barnsleyc04@gmail.com"
+                href="mailto:ctbarnsley@icloud.com"
                 className="flex items-center gap-2 text-sm hover:underline underline-offset-4 transition-colors"
                 style={{ color: "var(--accent)" }}
               >
-                barnsleyc04@gmail.com ↗
+                ctbarnsley@icloud.com ↗
               </a>
               <a
                 href="https://github.com/ConnorBar"

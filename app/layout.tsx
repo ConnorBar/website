@@ -77,7 +77,7 @@ function Footer() {
         </span>
         <div className="flex items-center gap-5">
           <a
-            href="https://github.com"
+            href="https://github.com/ConnorBar"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-gray-400 hover:text-gray-700 transition-colors"
@@ -85,7 +85,7 @@ function Footer() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/connor-barnsley/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-gray-400 hover:text-gray-700 transition-colors"
