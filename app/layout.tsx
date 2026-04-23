@@ -65,7 +65,7 @@ function Nav() {
             </Link>
           ))}
           <a
-            href="mailto:barnsleyc04@gmail.com"
+            href="mailto:ctbarnsley@icloud.com"
             className="mono text-xs px-3 py-1.5 rounded"
             style={{
               backgroundColor: "var(--accent)",
