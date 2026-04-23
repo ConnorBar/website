@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Connor Barnsley",
     description: "Data scientist, engineer, and explorer.",
     url: "https://cobars.space",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://cobars.space/og-image.png", width: 1200, height: 630 }]
   },
 
 };
