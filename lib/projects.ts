@@ -26,6 +26,7 @@ export const projects: Project[] = [
     description:
       "Optimized audio preprocessing with a multiprocessing pipeline, achieving an 81% speedup across 200,000 audio samples and yielding 3 million training/testing/validation examples. Leveraged CTC Forced Alignment for automatic sentence segmentation and phoneme boundary detection. Developed a Multi-Task Learning model using a ResNet + LSTM integrating Phonotactic Constraint Learning and Counterfactual Data Augmentation.",
     tags: ["PyTorch", "PyTorch Lightning", "Librosa", "Pandas", "Python"],
+    github: "https://github.com/ConnorBar/audio",
     featured: true,
     short_desc:
       "Built a Mandarin tone recognition model with a multiprocessing pipeline that cut preprocessing time by 81% across 200k audio samples.",

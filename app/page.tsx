@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <div className="max-w-5xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-10 pb-16 border-b border-gray-100">
+      <section className="pt-10 pb-10 border-b border-gray-100">
         <div className="flex flex-col-reverse md:flex-row md:items-start gap-10 md:gap-16">
           {/* Text */}
           <div className="flex-1 min-w-0">
@@ -79,8 +79,18 @@ export default function HomePage() {
                 About me
               </Link>
             </div>
+            <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p>
+            <ul className="space-y-1.5">
+              {[
+                "learning rust",
+              ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
+                    <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+            </ul>
           </div>
-
           {/* Photo */}
           <div className="shrink-0 md:pt-2">
             <Image
@@ -97,7 +107,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16 border-b border-gray-100">
+      <section className="py-10 border-b border-gray-100">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-widest mono">
             Featured Projects
@@ -143,7 +153,7 @@ export default function HomePage() {
       </section>
 
       {/* Travel teaser — pulls live from MDX files */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-widest mono">
             Recent Travels
