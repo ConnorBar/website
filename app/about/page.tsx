@@ -8,43 +8,48 @@ export const metadata: Metadata = {
 
 const awards = [
   {
-    title: "National Chinese Language Competition — 1st Place",
-    org: "Chinese Language Association",
-    year: "2024",
+    title: "Inducted to National Collegiate Chinese Honor Society",
+    org: "NCCHS",
+    year: "2026",
   },
   {
-    title: "Regional Mandarin Proficiency Award",
-    org: "Confucius Institute",
-    year: "2023",
+    title: "first place in 400 level chinese speaking divison",
+    org: "Purdue Chinese Department",
+    year: "2026",
   },
   {
-    title: "University Chinese Language Excellence Award",
-    org: "Department of Asian Studies",
+    title: "MC'ed a chinese speaking comp (50+ attendees)",
+    org: "Purdue Chinese Department",
+    year: "2026",
+  },
+  {
+    title: "Started studying!",
+    org: "",
     year: "2023",
   },
 ];
 
 const experience = [
   {
-    role: "Software Engineering Intern",
-    org: "Backend Systems",
-    period: "Summer 2024",
+    role: "Data Engineer Intern",
+    org: "US Space Force — Space Launch Delta 45, The Forge",
+    period: "June 2025 – August 2026",
     notes:
-      "Worked on distributed service infrastructure, query optimization, and developer tooling.",
+      "Designed a modular ETL pipeline framework consolidating 9+ ingestion scripts into a configurable scheduled system. Implemented Slowly Changing Dimension upserts with content-hash deduplication in PostgreSQL; added logging, centralized configs, Docker, and tests. Integrated Warpcore API ingestion and analyzed existing Envision/Warpcore data flows to support pipeline integration.",
   },
   {
-    role: "Research Assistant — Database Systems",
-    org: "University Research Lab",
-    period: "2023–present",
+    role: "Full Stack Engineer Intern",
+    org: "Stealth Startup",
+    period: "June 2024 – May 2025",
     notes:
-      "Query optimization research under faculty supervision. Working on cost-based plan selection for analytical workloads.",
+      "Built an interactive graph to model dynamic workload requests for EC2 VMs with comparative pricing analysis across cloud providers. Developed a dockerized microservice with secure API routing between dashboard and optimizer components. Refactored genetic algorithm control flow for seamless front-end integration.",
   },
   {
-    role: "Teaching Assistant — Data Structures",
-    org: "University",
-    period: "2023",
+    role: "Head Teaching Assistant — The Data Mine",
+    org: "Purdue University",
+    period: "August 2023 – Present",
     notes:
-      "Held office hours, graded assignments, led weekly review sessions for ~80 students.",
+      "Led weekly team meetings and coordinated operations across 7 course sections serving 2,400+ students. Designed curriculum for upper-level ML and introductory data analytics courses; created and taught a data analytics bootcamp for 20+ students. Promoted from Grading TA to Administrative Head TA.",
   },
 ];
 
@@ -121,9 +126,9 @@ export default function AboutPage() {
               Mandarin Chinese
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              I&apos;ve been studying Mandarin for several years and have competed
+              I&apos;ve been studying Mandarin for a few years and have competed
               in language proficiency competitions. My goal is genuine fluency —
-              I want to read literature and argue in meetings, not just order
+              I want to read literature and survive my girlfriends scoldings, not just order
               food. Currently targeting HSK 5.
             </p>
             <div className="space-y-3">
@@ -156,10 +161,11 @@ export default function AboutPage() {
               Education
             </h2>
             <div className="border border-gray-100 rounded-lg p-5">
-              <p className="font-medium text-gray-900 mb-1">B.S. Data Science</p>
-              <p className="text-sm text-gray-500 mb-3">University (in progress)</p>
+              <p className="font-medium text-gray-900 mb-0.5">B.S. Data Science</p>
+              <p className="text-xs text-gray-400 mono mb-1">Minor in Chinese &amp; Computer Science</p>
+              <p className="text-sm text-gray-500 mb-3">Purdue University · May 2026</p>
               <div className="space-y-1">
-                {["Machine Learning", "Database Systems", "Algorithms", "Statistics", "Software Engineering"].map((c) => (
+                {["Machine Learning", "Data Mining", "Algorithms", "Database Systems", "Software Engineering"].map((c) => (
                   <span
                     key={c}
                     className="mono text-xs px-2 py-0.5 rounded inline-block mr-1.5 mb-1.5"
@@ -172,6 +178,13 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
+            </div>
+            <div className="flex items-center gap-2 mt-3 px-1">
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: "#16a34a" }}
+              />
+              <span className="mono text-xs text-gray-500">Active T3 Secret Security Clearance</span>
             </div>
           </section>
 
@@ -207,7 +220,7 @@ export default function AboutPage() {
                 barnsleyc04@gmail.com ↗
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/ConnorBar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -215,7 +228,7 @@ export default function AboutPage() {
                 GitHub ↗
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/connor-barnsley"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"

@@ -1,67 +1,10 @@
 import type { Metadata } from "next";
+import { projects, type Project } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Projects | Connor Barnsley",
   description: "Software and data science projects by Connor Barnsley.",
 };
-
-type Project = {
-  title: string;
-  description: string;
-  tags: string[];
-  github?: string;
-  demo?: string;
-  featured?: boolean;
-};
-
-const projects: Project[] = [
-  {
-    title: "Query Optimizer",
-    description:
-      "Cost-based query optimizer built on top of a custom relational engine. Implements join reordering, predicate pushdown, and index selection. Benchmarked on TPC-H — achieved 3× average speedup over a naive plan.",
-    tags: ["C++", "PostgreSQL", "Database Systems", "Algorithms"],
-    github: "https://github.com",
-    featured: true,
-  },
-  {
-    title: "ML Pipeline Framework",
-    description:
-      "End-to-end framework for training and serving tabular ML models. Automated feature engineering, cross-validation, hyperparameter search, and model registry integration via MLflow. Designed to be dropped into any data team's workflow.",
-    tags: ["Python", "scikit-learn", "Pandas", "MLflow", "FastAPI"],
-    github: "https://github.com",
-    featured: true,
-  },
-  {
-    title: "Full-Stack Analytics Dashboard",
-    description:
-      "Real-time analytics platform backed by a custom data warehouse. Ingests event streams, materializes aggregates on write, and serves dashboards with sub-100ms query response at scale.",
-    tags: ["Next.js", "TypeScript", "ClickHouse", "SQL", "React"],
-    github: "https://github.com",
-    demo: "https://example.com",
-    featured: true,
-  },
-  {
-    title: "Distributed Key-Value Store",
-    description:
-      "A fault-tolerant key-value store implementing the Raft consensus protocol for leader election and log replication. Supports linearizable reads and writes across a cluster of nodes.",
-    tags: ["Go", "Raft", "Distributed Systems"],
-    github: "https://github.com",
-  },
-  {
-    title: "Chinese Vocabulary SRS",
-    description:
-      "Spaced-repetition flashcard app tuned for Mandarin learners. Uses an SM-2 variant with tone-awareness — wrong tone on a correct character is tracked separately from a full miss.",
-    tags: ["TypeScript", "React", "SQLite", "NLP"],
-    github: "https://github.com",
-  },
-  {
-    title: "Travel Log Static Site",
-    description:
-      "A lightweight static site generator for travel journals. Reads MDX files from a directory, generates a map with stop markers, and exports a fully static HTML bundle.",
-    tags: ["Node.js", "MDX", "Mapbox", "Static Site"],
-    github: "https://github.com",
-  },
-];
 
 export default function ProjectsPage() {
   const featured = projects.filter((p) => p.featured);

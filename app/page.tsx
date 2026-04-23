@@ -1,50 +1,36 @@
 import Link from "next/link";
+import Image from "next/image";
+import { getAllTrips } from "@/lib/travel";
+import { getFeaturedProjects } from "@/lib/projects";
 
 const skills = [
   "Python", "SQL", "TypeScript", "React", "Machine Learning",
   "PostgreSQL", "Data Engineering", "普通话 (Mandarin)",
 ];
 
-const featuredProjects = [
-  {
-    title: "Query Optimizer",
-    description:
-      "Implemented cost-based query optimization over a custom relational engine. Achieved 3× average speedup on TPC-H benchmarks.",
-    tags: ["C++", "PostgreSQL", "Database Systems"],
-    href: "/projects",
-  },
-  {
-    title: "ML Pipeline Framework",
-    description:
-      "End-to-end pipeline for training and serving tabular ML models, with automated feature engineering and experiment tracking.",
-    tags: ["Python", "scikit-learn", "Pandas", "MLflow"],
-    href: "/projects",
-  },
-  {
-    title: "Full-Stack Analytics Dashboard",
-    description:
-      "Real-time analytics board backed by a custom data warehouse, with sub-100ms query response at scale.",
-    tags: ["Next.js", "TypeScript", "ClickHouse", "SQL"],
-    href: "/projects",
-  },
-];
-
-const recentTrips = [
-  { name: "Tokyo", emoji: "🗾", slug: "tokyo" },
-  { name: "Taipei", emoji: "🌏", slug: "taipei" },
-  { name: "Seoul", emoji: "🇰🇷", slug: "seoul" },
-];
-
 export default function HomePage() {
+  const featuredProjects = getFeaturedProjects();
+  const recentTrips = getAllTrips().slice(0, 3);
+
   return (
     <div className="max-w-5xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-20 pb-16 border-b border-gray-100">
+      <section className="pt-10 pb-16 border-b border-gray-100">
         <p className="mono text-sm mb-4" style={{ color: "var(--accent)" }}>
           // data scientist & engineer
         </p>
-        <h1 className="text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-6">
+        <h1 className="text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-1">
           Connor Barnsley
+        </h1>
+        <></>
+        <h1 className="tracking-tight  mb-4">
+            <div className="flex items-center gap-2 mt-3 px-1">
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: "#16a34a" }}
+              />
+              <span className="mono text-sm text-gray-500">Active T3 Secret Security Clearance</span>
+            </div>
         </h1>
         <p className="text-xl text-gray-500 max-w-xl leading-relaxed mb-10">
           I build things with data. Currently studying Data Science, working on
@@ -127,7 +113,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Travel teaser */}
+      {/* Travel teaser — pulls live from MDX files */}
       <section className="py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-widest mono">
@@ -146,11 +132,31 @@ export default function HomePage() {
             <Link
               key={t.slug}
               href={`/travel/${t.slug}`}
-              className="flex-1 border border-gray-100 rounded-lg p-5 hover:border-gray-300 transition-all text-center group"
+              className="flex-1 border border-gray-100 rounded-lg overflow-hidden hover:border-gray-300 transition-all group"
             >
-              <div className="text-3xl mb-2">{t.emoji}</div>
-              <div className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
-                {t.name}
+              <div className="h-24 relative">
+                {t.coverImage ? (
+                  <Image
+                    src={t.coverImage}
+                    alt={t.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="33vw"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    style={{ backgroundColor: t.coverColor }}
+                  >
+                    <span className="text-3xl">{t.emoji}</span>
+                  </div>
+                )}
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                  {t.title}
+                </div>
+                <div className="mono text-xs text-gray-400 mt-0.5">{t.country}</div>
               </div>
             </Link>
           ))}
