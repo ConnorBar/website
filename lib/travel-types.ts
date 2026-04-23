@@ -1,11 +1,12 @@
 // Shared types and constants — no Node.js imports, safe for client components
 
-export type TripCategory = "international" | "domestic" | "day-trip";
+export type TripCategory = "international" | "domestic" | "day-trip" | "concert";
 
 export const CATEGORY_LABELS: Record<TripCategory, string> = {
   international: "International",
   domestic: "Domestic",
   "day-trip": "Day trip",
+  concert: "Concerts",
 };
 
 export type TripMeta = {
@@ -18,6 +19,7 @@ export type TripMeta = {
   coverColor: string;
   coverImage?: string;
   category: TripCategory;
+  favorite?: boolean;
 };
 
 export type Trip = TripMeta & {

@@ -5,6 +5,7 @@ export type Project = {
   github?: string;
   demo?: string;
   featured?: boolean;
+  wip?: boolean;
   short_desc?: string;
   short_tags?: string[];
 };
@@ -42,6 +43,39 @@ export const projects: Project[] = [
       "Real-time gesture-controlled instrument — won 2nd at Purdue's Boilermake out of 70+ projects.",
     short_tags: ["MediaPipe", "Magenta.js", "JavaScript"],
   },
+  {
+    title: "EasyEats (WIP)",
+    description:
+      "This is for if you dont know what you can make with what u got in ur pantry",
+    tags: ["Flutter", "FastAPI", "MongoDB"],
+    github: "https://github.com/ConnorBar/easyeats",
+    featured: false,
+    // short_desc:
+    //   "All-in-one finance tracker. Blazing fast and secure.",
+    // short_tags: ["Rust", "TypeScript", "Plaid"],
+  },
+  {
+    title: "E-Clair (WIP)",
+    description:
+      "Rocket Money? Monarch? naw bro you must have hit your head. this does takes all of that PLUS more & blazingly fast.",
+    tags: ["Rust", "TypeScript", "Plaid"],
+    github: "https://github.com/ConnorBar/eclair",
+    featured: false,
+    short_desc:
+      "All-in-one finance tracker. Blazing fast and secure.",
+    short_tags: ["Rust", "TypeScript", "Plaid"],
+  },
+  {
+    title: "Legend of the White Snake - Story Mode (WIP Passion Project)",
+    description:
+      "Inspired by the Chinese story 白娘子 that has many different interpretations all changing throughout history, this is a 2D RPG style game that has decision based endings. ",
+    tags: ["Godot", "Gamedesign"],
+    // github: "https://github.com/ConnorBar/eclair",
+    featured: false,
+    // short_desc:
+    //   "All-in-one finance tracker. Blazing fast and secure.",
+    // short_tags: ["Rust", "TypeScript", "Plaid"],
+  },
 ];
 
 export function getFeaturedProjects() {
@@ -53,4 +87,9 @@ export function getFeaturedProjects() {
       tags: p.short_tags ?? p.tags,
       href: "/projects",
     }));
-}
+};
+
+export function getWIPProjects() {
+  return projects.filter((p) => p.wip);
+};
+

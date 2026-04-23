@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -22,6 +23,11 @@ const awards = [
     org: "Purdue Chinese Department",
     year: "2026",
   },
+  // {
+  //   title: "Placement exam: ",
+  //   org: "",
+  //   year: "2023",
+  // },
   {
     title: "Started studying!",
     org: "",
@@ -58,7 +64,7 @@ const now = [
   "Studying for HSK 5 (Mandarin proficiency exam)",
   "Building this site",
   "Planning a trip to Chengdu and Chongqing",
-  "Reading: *The Dream of the Red Chamber* (慢慢来)",
+  "Reading: 《狂人日記》和",
 ];
 
 export default function AboutPage() {
@@ -69,10 +75,22 @@ export default function AboutPage() {
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>
           // about
         </p>
+        {/* Float photo right — text wraps around it regardless of photo size */}
+        <div className="float-right ml-8 mb-4">
+          <Image
+            src="/images/headshot.jpg"
+            alt="Connor Barnsley"
+            width={250}
+            height={280}
+            className="rounded-full border-2 border-gray-100"
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+            priority
+          />
+        </div>
         <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-6">
           Hi, I&apos;m Connor.
         </h1>
-        <div className="max-w-2xl space-y-4 text-lg text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
           <p>
             I&apos;m a Data Science student with a serious interest in the systems
             side of things — database internals, query optimization, and how you
@@ -89,6 +107,7 @@ export default function AboutPage() {
             pretending they&apos;re separate things.
           </p>
         </div>
+        <div className="clear-both" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
