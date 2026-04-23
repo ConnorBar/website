@@ -98,8 +98,8 @@ export default function AboutPage() {
           </p>
           <p>
             Outside of work, I study Mandarin Chinese (aiming for fluency, not
-            just proficiency), and I travel as much as I can. I&apos;m most
-            comfortable in East Asia but trying to broaden that.
+            just proficiency), and I travel as much as I can. Domestic wise, looking
+            to hit up some national parks and eventually check out Ireland.
           </p>
           <p>
             I built this site because I wanted one place that holds all of it —
