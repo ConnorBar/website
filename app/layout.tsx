@@ -7,6 +7,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Connor Barnsley",
   description: "Data scientist, engineer, and explorer.",
+  icons: { icon: "/icon.svg" },
+  openGraph: {
+    title: "Connor Barnsley",
+    description: "Data scientist, engineer, and explorer.",
+    url: "https://cobars.space",
+    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
+  },
+
 };
 
 export default function RootLayout({
