@@ -188,7 +188,6 @@ export default function AboutPage() {
                       <Link
                         key={a.slug}
                         href={`/travel/${a.slug}`}
-                        target="_blank"
                         rel="noopener noreferrer"
                         className="block text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors"
                       >
