@@ -52,7 +52,7 @@ function Nav() {
           href="/"
           className="mono text-white text-sm font-medium tracking-tight hover:opacity-80 transition-opacity"
         >
-          cb.dev
+          cobar.dev
         </Link>
         <nav className="flex items-center gap-7">
           {links.map((l) => (
