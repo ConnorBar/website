@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { getAllTrips } from "@/lib/travel";
+
 export const metadata: Metadata = {
   title: "About | Connor Barnsley",
   description: "A bit about Connor Barnsley — data scientist, engineer, Mandarin learner, traveler.",
 };
+
+const taiwan_trips = getAllTrips().filter(trip => trip.country == "Taiwan").reverse();
 
 const awards = [
   {
@@ -26,6 +30,7 @@ const awards = [
   {
     title: "Visited Taiwan again",
     org: "",
+    slug: taiwan_trips[1].slug,
     year: "2025-12",
   },
   {
@@ -36,6 +41,7 @@ const awards = [
   {
     title: "Taiwan Study Abroad",
     org: "Purdue Chinese Department",
+    slug: taiwan_trips[0].slug,
     year: "2024-05",
   },
   {
@@ -178,7 +184,20 @@ export default function AboutPage() {
                     {a.year}
                   </span>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{a.title}</p>
+                    {a.slug ? (
+                      <Link
+                        key={a.slug}
+                        href={`/travel/${a.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors"
+                      >
+                        {a.title} ↗
+                      </Link>
+                    ) : ( 
+                      <p className="text-sm font-medium text-gray-900">{a.title}</p>
+
+                    )}
                     <p className="text-xs text-gray-500 mt-0.5">{a.org}</p>
                   </div>
                 </div>

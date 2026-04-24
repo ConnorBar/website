@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <div className="max-w-5xl mx-auto px-6">
       {/* Hero */}
-      <section className="pt-10 pb-10 border-b border-gray-100">
+      <section className="pt-10 pb-8 border-b border-gray-100">
         <div className="flex flex-col-reverse md:flex-row md:items-start gap-10 md:gap-16">
           {/* Text */}
           <div className="flex-1 min-w-0">
@@ -83,6 +83,7 @@ export default function HomePage() {
             <ul className="space-y-1.5">
               {[
                 "learning rust",
+                "making this site lol"
               ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
                     <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
