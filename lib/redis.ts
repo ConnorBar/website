@@ -4,7 +4,8 @@ const redis = createClient({
   url: process.env.WEBSITE_REDIS_URL,
   socket: {
     reconnectStrategy: (retries) => Math.min(retries * 50, 2000),
-    keepAlive: 5000,
+    keepAlive: true,
+    keepAliveInitialDelay: 5000,
   },
 });
 
