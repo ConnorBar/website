@@ -77,6 +77,18 @@ export const projects: Project[] = [
     //   "All-in-one finance tracker. Blazing fast and secure.",
     // short_tags: ["Rust", "TypeScript", "Plaid"],
   },
+  {
+    title: "This website!",
+    description:
+      "its pretty cool huh? check it out!",
+    tags: ["React", "MusicKit", "Redis"],
+    github: "https://github.com/ConnorBar/website",
+    demo: "https://cobars.space",
+    featured: false,
+    // short_desc:
+    //   "",
+    // short_tags: [],
+  },
 ];
 
 export function getFeaturedProjects() {
