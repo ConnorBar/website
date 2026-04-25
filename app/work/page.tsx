@@ -1,60 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
-import { getAllTrips } from "@/lib/travel";
 
 export const metadata: Metadata = {
   title: "About | Connor Barnsley",
   description: "A bit about Connor Barnsley — data scientist, engineer, Mandarin learner, traveler.",
 };
-
-const taiwan_trips = getAllTrips().filter(trip => trip.country == "Taiwan").reverse();
-
-const awards = [
-  {
-    title: "Inducted to National Collegiate Chinese Honor Society",
-    org: "CLTA NCCHS - 大学中文荣誉生协会",
-    year: "2026-04",
-  },
-  {
-    title: "First place in 400 level chinese speaking divison",
-    org: "Purdue Chinese Speech & Performance Contest",
-    year: "2026-03",
-  },
-  {
-    title: "Was Host for a chinese speaking comp (50+ attendees)",
-    org: "Purdue Chinese Speech & Performance Contest",
-    year: "2026-03",
-  },
-  {
-    title: "Visited Taiwan again",
-    org: "",
-    slug: taiwan_trips[1].slug,
-    year: "2025-12",
-  },
-  {
-    title: "Placement exam: (听力) Intermediate High (阅读) Advanced Low",
-    org: "TOCFL Speedy Screening",
-    year: "2025-11",
-  },
-  {
-    title: "Taiwan Study Abroad",
-    org: "Purdue Chinese Department",
-    slug: taiwan_trips[0].slug,
-    year: "2024-05",
-  },
-  {
-    title: "Placement exam: (听力) Novice Mid (阅读) Intermediate Low",
-    org: "TOCFL Speedy Screening",
-    year: "2024-03",
-  },
-  {
-    title: "Started studying!",
-    org: "",
-    year: "2023-08",
-  },
-];
 
 const experience = [
   {
@@ -94,7 +45,7 @@ export default function AboutPage() {
       {/* Header */}
       <div className="mb-16">
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>
-          // about
+          // work
         </p>
         {/* Float photo right — text wraps around it regardless of photo size */}
         <div className="float-right ml-8 mb-4">
@@ -113,20 +64,24 @@ export default function AboutPage() {
         </h1>
         <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
           <p>
-            I&apos;m a Data Science student with a serious interest in the systems
-            side of things — database internals, query optimization, and how you
-            build infrastructure that actually holds up at scale.
+            I&apos;m a Data Science student focused on the engineering side — building
+            reliable data pipelines, training ML models end-to-end, and designing systems
+            that hold up under real-world constraints. My work spans reinforcement learning,
+            multimodal ML, and data infrastructure.
           </p>
           <p>
-            Outside of work, I study Mandarin Chinese (aiming for fluency, not
-            just proficiency), and I travel as much as I can. Domestic wise, looking
-            to hit up some national parks and eventually check out Ireland.
+            I&apos;m drawn to the defense space because of where I come from. I was raised
+            in a military household — my father spent 12 years as a navigator before
+            spending the last 24 at the 618th AOC as a flight manager, and my mother served
+            active duty for 6 years before retiring as a Lt. Colonel after 22 years in the
+            AMC PA reserves. Serving in some capacity has always felt less like a choice and
+            more like a direction, and building tools that matter in high-stakes environments
+            is where I want to put my work.
+
           </p>
-          <p>
-            I built this site because I wanted one place that holds all of it —
-            the technical work, the language stuff, the travel writing — without
-            pretending they&apos;re separate things.
-          </p>
+
+
+
         </div>
         <div className="clear-both" />
       </div>
@@ -160,49 +115,6 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* Chinese & Awards */}
-          <section>
-            <h2 className="mono text-xs text-gray-400 uppercase tracking-widest mb-6">
-              Mandarin Chinese
-            </h2>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              I&apos;ve been studying Mandarin for a few years and have competed
-              in language proficiency competitions. My goal is genuine fluency —
-              I want to read literature and survive my girlfriends scoldings, not just order
-              food. Currently targeting HSK 5.
-            </p>
-            <div className="space-y-3">
-              {awards.map((a) => (
-                <div
-                  key={a.title}
-                  className="flex items-start gap-4 p-4 rounded-lg border border-gray-100"
-                >
-                  <span
-                    className="mono text-xs font-medium shrink-0 mt-0.5"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    {a.year}
-                  </span>
-                  <div>
-                    {a.slug ? (
-                      <Link
-                        key={a.slug}
-                        href={`/travel/${a.slug}`}
-                        rel="noopener noreferrer"
-                        className="block text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors"
-                      >
-                        {a.title} ↗
-                      </Link>
-                    ) : (
-                      <p className="text-sm font-medium text-gray-900">{a.title}</p>
-
-                    )}
-                    <p className="text-xs text-gray-500 mt-0.5">{a.org}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
         </div>
 
         {/* Right column */}

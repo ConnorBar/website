@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Awards from "@/lib/mandarin";
 import { getAllTrips } from "@/lib/travel";
 import { getFeaturedProjects } from "@/lib/projects";
 
@@ -7,6 +8,7 @@ const skills = [
   "Python", "SQL", "TypeScript", "React", "Machine Learning",
   "PostgreSQL", "Data Engineering", "普通话 (Mandarin)",
 ];
+
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects();
@@ -67,16 +69,18 @@ export default function HomePage() {
                 See my projects
               </Link>
               <Link
+                href="/work"
+                // className="px-5 py-2.5 rounded text-sm font-medium text-gray-700 border border-gray-200 hover:border-gray-400 transition-colors"
+                className="px-5 py-2.5 rounded text-sm font-medium text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "var(--accent)" }}
+              >
+                Work Experience
+              </Link>
+              <Link
                 href="/travel"
                 className="px-5 py-2.5 rounded text-sm font-medium text-gray-700 border border-gray-200 hover:border-gray-400 transition-colors"
               >
                 See where I've been
-              </Link>
-              <Link
-                href="/about"
-                className="px-5 py-2.5 rounded text-sm font-medium text-gray-700 border border-gray-200 hover:border-gray-400 transition-colors"
-              >
-                About me
               </Link>
             </div>
             <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p>
@@ -85,11 +89,11 @@ export default function HomePage() {
                 "learning rust",
                 "making this site lol"
               ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
-                    <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
-                    {item}
-                  </li>
-                ))}
+                <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
+                  <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
           {/* Photo */}
@@ -105,10 +109,10 @@ export default function HomePage() {
             />
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Featured Projects */}
-      <section className="py-10 border-b border-gray-100">
+      < section className="py-10 border-b border-gray-100" >
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-widest mono">
             Featured Projects
@@ -151,10 +155,57 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+      </section >
+
+      {/* Chinese & Awards */}
+      < section className="py-10 border-b border-gray-100" >
+        <h2 className="mono text-sm font-medium text-gray-400 uppercase tracking-widest mb-6">
+          Mandarin Chinese
+        </h2>
+        <p className="text-gray-600 leading-relaxed mb-6">
+          I&apos;ve been studying Mandarin for a few years and have competed
+          in language proficiency competitions. My goal is genuine fluency —
+          I want to read literature (and survive my girlfriends scoldings), not just order
+          food. Currently targeting HSK 5.
+        </p>
+        <div className="space-y-3">
+          {Awards.map((a) => (
+            <div
+              key={a.title}
+              className="flex items-start gap-4 p-4 rounded-lg border border-gray-100"
+            >
+              <span
+                className="mono text-xs font-medium shrink-0 mt-0.5"
+                style={{ color: "var(--accent)" }}
+              >
+                {a.year}
+              </span>
+              <div>
+                {a.slug ? (
+                  <Link
+                    key={a.slug}
+                    href={`/travel/${a.slug}`}
+                    rel="noopener noreferrer"
+                    className="block text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors"
+                  >
+                    {a.title} ↗
+                  </Link>
+                ) : (
+                  <p className="text-sm font-medium text-gray-900">{a.title}</p>
+
+                )}
+                <p className="text-xs text-gray-500 mt-0.5">{a.org}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
+
+
+
       {/* Travel teaser — pulls live from MDX files */}
-      <section className="py-10">
+      < section className="py-10" >
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-widest mono">
             Recent Travels
@@ -211,7 +262,7 @@ export default function HomePage() {
             );
           })}
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

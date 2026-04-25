@@ -6,8 +6,8 @@ import { NowPlaying } from "@/components/NowPlaying";
 
 const links = [
   { href: "/projects", label: "Projects" },
+  { href: "/work", label: "Work" },
   { href: "/travel", label: "Travel" },
-  { href: "/about", label: "About" },
 ];
 
 export function Nav() {
