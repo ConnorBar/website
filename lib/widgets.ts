@@ -132,35 +132,39 @@ export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
         ?? `https://music.apple.com/search?term=${encodeURIComponent(item.attributes.artistName + " " + item.attributes.name)}`,
     });
 
+    console.log("[Apple] recentRes status:", recentRes.status);
     const recentData = recentRes.ok ? await recentRes.json() : null;
     const recent: Track[] = (recentData?.data ?? []).map(mapAppleTrack);
 
     const firstTrack = recentData?.data?.[0];
+    console.log("[Apple] first track:", firstTrack?.attributes?.name ?? "none");
     if (!firstTrack) return { isPlaying: false, current: null, recent: [] };
 
     const firstTitle: string = firstTrack.attributes.name;
     const durationInMillis: number = firstTrack.attributes.durationInMillis ?? 0;
 
-    // Redis-backed isPlaying heuristic
     let isPlaying = false;
     try {
       const { getRedis } = await import("@/lib/redis");
       const redis = await getRedis();
       const raw = await redis.get(REDIS_KEY);
       const cached: CachedTrack | null = raw ? JSON.parse(raw) : null;
+      console.log("[Redis] cached title:", cached?.title ?? "none", "| incoming:", firstTitle);
 
       if (!cached || cached.title !== firstTitle) {
         const entry: CachedTrack = { title: firstTitle, seenAt: Date.now(), durationInMillis };
         await redis.set(REDIS_KEY, JSON.stringify(entry), { EX: 3600 });
         isPlaying = true;
+        console.log("[Redis] updated to new song, isPlaying=true");
       } else {
-        isPlaying = Date.now() - cached.seenAt < cached.durationInMillis + PLAY_BUFFER_MS;
+        const elapsed = Date.now() - cached.seenAt;
+        isPlaying = elapsed < cached.durationInMillis + PLAY_BUFFER_MS;
+        console.log(`[Redis] same song, elapsed=${elapsed}ms / ${durationInMillis}ms, isPlaying=${isPlaying}`);
       }
     } catch (e) {
-      console.error("[Redis] isPlaying check failed:", e);
+      console.error("[Redis] failed:", e);
     }
 
-    console.log("[NowPlaying] isPlaying:", isPlaying, "| title:", firstTitle);
     return { isPlaying, current: mapAppleTrack(firstTrack), recent };
   } catch (error) {
     console.error("Error fetching Apple Music data:", error);

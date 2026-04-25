@@ -1,12 +1,22 @@
 import { createClient } from "redis";
 
-const redis = createClient({ url: process.env.WEBSITE_REDIS_URL });
+const redis = createClient({
+  url: process.env.WEBSITE_REDIS_URL,
+  socket: {
+    reconnectStrategy: (retries) => Math.min(retries * 50, 2000),
+    keepAlive: 5000,
+  },
+});
 
-redis.on("error", (err) => console.error("[Redis] client error:", err));
+redis.on("error", (err) => {
+  // ECONNRESET is expected on idle connections — client will auto-reconnect
+  if ((err as NodeJS.ErrnoException).code !== "ECONNRESET") {
+    console.error("[Redis] client error:", err);
+  }
+});
 
 export async function getRedis() {
   if (!redis.isOpen) {
-    console.log("[Redis] connecting...");
     await redis.connect();
   }
   return redis;
