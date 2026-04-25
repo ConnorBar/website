@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Link from "next/link";
 import { NowPlaying } from "@/components/NowPlaying";
+import { Nav } from "@/components/Nav"
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,54 +35,6 @@ export default function RootLayout({
         <SpeedInsights />
       </body>
     </html>
-  );
-}
-
-function Nav() {
-  const links = [
-    { href: "/projects", label: "Projects" },
-    { href: "/travel", label: "Travel" },
-    { href: "/about", label: "About" },
-  ];
-
-  return (
-    <header
-      style={{ backgroundColor: "var(--nav-bg)" }}
-      className="sticky top-0 z-50"
-    >
-      <div className="max-w-5xl mx-auto px-6 h-14 grid grid-cols-3 items-center">
-        <Link
-          href="/"
-          className="mono text-white text-sm font-medium tracking-tight hover:opacity-80 transition-opacity"
-        >
-          cobars.space
-        </Link>
-        <div className="flex justify-center">
-          <NowPlaying />
-        </div>
-        <nav className="flex items-center gap-7 justify-end">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-gray-400 hover:text-white transition-colors"
-            >
-              {l.label}
-            </Link>
-          ))}
-          <a
-            href="mailto:ctbarnsley@icloud.com"
-            className="mono text-xs px-3 py-1.5 rounded"
-            style={{
-              backgroundColor: "var(--accent)",
-              color: "#fff",
-            }}
-          >
-            Contact
-          </a>
-        </nav>
-      </div>
-    </header>
   );
 }
 
