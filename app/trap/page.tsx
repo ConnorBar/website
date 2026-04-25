@@ -36,7 +36,7 @@ export default async function TrapPage({ searchParams }: { searchParams: Record<
           <p>DB_PASSWORD=Sup3rS3cr3tPr0dPassw0rd!_DoNotShare</p>
           <p>AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE</p>
           <p>AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</p>
-          <p>STRIPE_SECRET_KEY=sk_live_51FakeStripeKeyGeneratedForBots83920</p>
+          <p>STRIPE_SECRET_KEY=sk_prod_51HoneypotFakeKeyForBotsOnly83920</p>
           
           <h2>Admin Directory</h2>
           <a href="mailto:admin@yourdomain.com">admin@yourdomain.com</a>
