@@ -11,7 +11,7 @@ export default function ProjectsPage() {
   const rest = projects.filter((p) => !p.featured);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Header */}
       <div className="mb-14">
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>

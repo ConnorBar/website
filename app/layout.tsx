@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { NowPlaying } from "@/components/NowPlaying";
 import { Nav } from "@/components/Nav"
 import "./globals.css";
 

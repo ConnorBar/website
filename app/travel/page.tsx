@@ -11,7 +11,7 @@ export default function TravelPage() {
   const trips = getAllTrips();
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Header */}
       <div className="mb-10">
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>

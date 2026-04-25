@@ -90,7 +90,7 @@ const now = [
 
 export default function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Header */}
       <div className="mb-16">
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>
@@ -193,7 +193,7 @@ export default function AboutPage() {
                       >
                         {a.title} ↗
                       </Link>
-                    ) : ( 
+                    ) : (
                       <p className="text-sm font-medium text-gray-900">{a.title}</p>
 
                     )}
