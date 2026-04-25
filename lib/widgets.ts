@@ -13,6 +13,92 @@ export type NowPlayingData = {
   recent: Track[];
 };
 
+
+// ── Apple Music ──────────────────────────────────────────────────────────────
+
+const PLAY_BUFFER_MS = 12_000; // 12s buffer for network delay + poll lag
+const REDIS_KEY = "nowplaying:current";
+
+type CachedTrack = {
+  title: string;
+  seenAt: number;
+  durationInMillis: number;
+};
+
+export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
+  const developerToken = process.env.APPLE_MUSIC_DEVELOPER_TOKEN;
+  const musicUserToken = process.env.APPLE_MUSIC_USER_TOKEN;
+
+  if (!developerToken || !musicUserToken) {
+    return { isPlaying: false, current: null, recent: [] };
+  }
+
+  const headers = {
+    Authorization: `Bearer ${developerToken}`,
+    "Music-User-Token": musicUserToken,
+  };
+
+  try {
+    const recentRes = await fetch(
+      "https://api.music.apple.com/v1/me/recent/played/tracks?limit=5",
+      { headers, cache: "no-store" }
+    );
+    console.log(recentRes);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mapAppleTrack = (item: any): Track => ({
+      title: item.attributes.name,
+      artist: item.attributes.artistName,
+      albumArt: item.attributes.artwork
+        ? item.attributes.artwork.url.replace("{w}", "64").replace("{h}", "64")
+        : undefined,
+      url: item.attributes.url
+        ?? `https://music.apple.com/search?term=${encodeURIComponent(item.attributes.artistName + " " + item.attributes.name)}`,
+    });
+
+    const recentData = recentRes.ok ? await recentRes.json() : null;
+
+    // recentData?.data?.forEach((item: any, index: number) => {
+    //   console.log(index, item.attributes)
+    // })
+
+    const recent: Track[] = (recentData?.data ?? []).map(mapAppleTrack);
+
+    const firstTrack = recentData?.data?.[0];
+    if (!firstTrack) return { isPlaying: false, current: null, recent: [] };
+
+    const firstTitle: string = firstTrack.attributes.name;
+    const durationInMillis: number = firstTrack.attributes.durationInMillis ?? 0;
+
+    // Redis-backed isPlaying heuristic
+    let isPlaying = false;
+    try {
+      const { getRedis } = await import("@/lib/redis");
+      const redis = await getRedis();
+      const raw = await redis.get(REDIS_KEY);
+      const cached: CachedTrack | null = raw ? JSON.parse(raw) : null;
+
+      if (!cached || cached.title !== firstTitle) {
+        const entry: CachedTrack = { title: firstTitle, seenAt: Date.now(), durationInMillis };
+        await redis.set(REDIS_KEY, JSON.stringify(entry), { EX: 3600 });
+        isPlaying = true;
+      } else {
+        isPlaying = Date.now() - cached.seenAt < cached.durationInMillis + PLAY_BUFFER_MS;
+      }
+    } catch (e) {
+      console.error("[Redis] isPlaying check failed:", e);
+    }
+
+    console.log("[NowPlaying] isPlaying:", isPlaying, "| title:", firstTitle);
+    return { isPlaying, current: mapAppleTrack(firstTrack), recent };
+  } catch (error) {
+    console.error("Error fetching Apple Music data:", error);
+    return { isPlaying: false, current: null, recent: [] };
+  }
+}
+
+
+
 // ── Spotify ──────────────────────────────────────────────────────────────────
 
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
@@ -87,87 +173,6 @@ export async function getSpotifyNowPlaying(): Promise<NowPlayingData> {
     return { isPlaying: true, current, recent: recentWithCurrent };
   } catch (error) {
     console.error("Error fetching Spotify data:", error);
-    return { isPlaying: false, current: null, recent: [] };
-  }
-}
-
-// ── Apple Music ──────────────────────────────────────────────────────────────
-
-const PLAY_BUFFER_MS = 12_000; // 12s buffer for network delay + poll lag
-const REDIS_KEY = "nowplaying:current";
-
-type CachedTrack = {
-  title: string;
-  seenAt: number;
-  durationInMillis: number;
-};
-
-export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
-  const developerToken = process.env.APPLE_MUSIC_DEVELOPER_TOKEN;
-  const musicUserToken = process.env.APPLE_MUSIC_USER_TOKEN;
-
-  if (!developerToken || !musicUserToken) {
-    return { isPlaying: false, current: null, recent: [] };
-  }
-
-  const headers = {
-    Authorization: `Bearer ${developerToken}`,
-    "Music-User-Token": musicUserToken,
-  };
-
-  try {
-    const recentRes = await fetch(
-      "https://api.music.apple.com/v1/me/recent/played/tracks?limit=5",
-      { headers, cache: "no-store" }
-    );
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mapAppleTrack = (item: any): Track => ({
-      title: item.attributes.name,
-      artist: item.attributes.artistName,
-      albumArt: item.attributes.artwork
-        ? item.attributes.artwork.url.replace("{w}", "64").replace("{h}", "64")
-        : undefined,
-      url: item.attributes.url
-        ?? `https://music.apple.com/search?term=${encodeURIComponent(item.attributes.artistName + " " + item.attributes.name)}`,
-    });
-
-    console.log("[Apple] recentRes status:", recentRes.status);
-    const recentData = recentRes.ok ? await recentRes.json() : null;
-    const recent: Track[] = (recentData?.data ?? []).map(mapAppleTrack);
-
-    const firstTrack = recentData?.data?.[0];
-    console.log("[Apple] first track:", firstTrack?.attributes?.name ?? "none");
-    if (!firstTrack) return { isPlaying: false, current: null, recent: [] };
-
-    const firstTitle: string = firstTrack.attributes.name;
-    const durationInMillis: number = firstTrack.attributes.durationInMillis ?? 0;
-
-    let isPlaying = false;
-    try {
-      const { getRedis } = await import("@/lib/redis");
-      const redis = await getRedis();
-      const raw = await redis.get(REDIS_KEY);
-      const cached: CachedTrack | null = raw ? JSON.parse(raw) : null;
-      console.log("[Redis] cached title:", cached?.title ?? "none", "| incoming:", firstTitle);
-
-      if (!cached || cached.title !== firstTitle) {
-        const entry: CachedTrack = { title: firstTitle, seenAt: Date.now(), durationInMillis };
-        await redis.set(REDIS_KEY, JSON.stringify(entry), { EX: 3600 });
-        isPlaying = true;
-        console.log("[Redis] updated to new song, isPlaying=true");
-      } else {
-        const elapsed = Date.now() - cached.seenAt;
-        isPlaying = elapsed < cached.durationInMillis + PLAY_BUFFER_MS;
-        console.log(`[Redis] same song, elapsed=${elapsed}ms / ${durationInMillis}ms, isPlaying=${isPlaying}`);
-      }
-    } catch (e) {
-      console.error("[Redis] failed:", e);
-    }
-
-    return { isPlaying, current: mapAppleTrack(firstTrack), recent };
-  } catch (error) {
-    console.error("Error fetching Apple Music data:", error);
     return { isPlaying: false, current: null, recent: [] };
   }
 }
