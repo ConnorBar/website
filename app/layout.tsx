@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Link from "next/link";
+import { NowPlaying } from "@/components/NowPlaying";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col">
+        {/* honeypot — invisible to humans, logged when bots follow it */}
+        <a href="/trap" style={{ display: "none" }} aria-hidden="true" tabIndex={-1}>sitemap</a>
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -47,14 +50,17 @@ function Nav() {
       style={{ backgroundColor: "var(--nav-bg)" }}
       className="sticky top-0 z-50"
     >
-      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 h-14 grid grid-cols-3 items-center">
         <Link
           href="/"
           className="mono text-white text-sm font-medium tracking-tight hover:opacity-80 transition-opacity"
         >
-          cobar.dev
+          cobars.space
         </Link>
-        <nav className="flex items-center gap-7">
+        <div className="flex justify-center">
+          <NowPlaying />
+        </div>
+        <nav className="flex items-center gap-7 justify-end">
           {links.map((l) => (
             <Link
               key={l.href}
