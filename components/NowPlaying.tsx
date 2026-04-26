@@ -22,7 +22,7 @@ export function NowPlaying() {
           developerToken: process.env.NEXT_PUBLIC_APPLE_MUSIC_DEVELOPER_TOKEN,
           app: { name: "cobars.space", build: "1.0" },
         });
-      } catch {}
+      } catch { }
     };
     document.head.appendChild(script);
     return () => { document.head.removeChild(script); };
@@ -56,7 +56,7 @@ export function NowPlaying() {
               }
             }
           }
-        } catch {}
+        } catch { }
 
         const nextTitle = next?.current?.title ?? null;
         if (prevTitleRef.current !== null && prevTitleRef.current !== nextTitle) {
@@ -64,7 +64,7 @@ export function NowPlaying() {
         }
         prevTitleRef.current = nextTitle;
         setData(next);
-      } catch {}
+      } catch { }
     }
     load();
     const interval = setInterval(load, 10_000);
@@ -81,7 +81,7 @@ export function NowPlaying() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  if (!data?.current) return null;
+  if (!data?.current) return <div className="w-[200px]" />;
 
   const { isPlaying, current, recent } = data;
 
