@@ -1,43 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { experience, now } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "About | Connor Barnsley",
   description: "A bit about Connor Barnsley — data scientist, engineer, Mandarin learner, traveler.",
 };
-
-const experience = [
-  {
-    role: "Data Engineer Intern",
-    org: "US Space Force — Space Launch Delta 45, The Forge",
-    period: "June 2025 – August 2026",
-    notes:
-      "Designed a modular ETL pipeline framework consolidating 9+ ingestion scripts into a configurable scheduled system. Implemented Slowly Changing Dimension upserts with content-hash deduplication in PostgreSQL; added logging, centralized configs, Docker, and tests. Integrated Warpcore API ingestion and analyzed existing Envision/Warpcore data flows to support pipeline integration.",
-  },
-  {
-    role: "Full Stack Engineer Intern",
-    org: "Stealth Startup",
-    period: "June 2024 – May 2025",
-    notes:
-      "Built an interactive graph to model dynamic workload requests for EC2 VMs with comparative pricing analysis across cloud providers. Developed a dockerized microservice with secure API routing between dashboard and optimizer components. Refactored genetic algorithm control flow for seamless front-end integration.",
-  },
-  {
-    role: "Head Teaching Assistant — The Data Mine",
-    org: "Purdue University",
-    period: "August 2023 – Present",
-    notes:
-      "Led weekly team meetings and coordinated operations across 7 course sections serving 2,400+ students. Designed curriculum for upper-level ML and introductory data analytics courses; created and taught a data analytics bootcamp for 20+ students. Promoted from Grading TA to Administrative Head TA.",
-  },
-];
-
-const now = [
-  "Finishing my Data Science degree",
-  "Looking for positions in Boston",
-  "Building this site",
-  "Studying for HSK 5 (Mandarin proficiency exam)",
-  "Reading: 《狂人日記》",
-];
 
 export default function AboutPage() {
   return (
@@ -77,11 +46,7 @@ export default function AboutPage() {
             AMC PA reserves. Serving in some capacity has always felt less like a choice and
             more like a direction, and building tools that matter in high-stakes environments
             is where I want to put my work.
-
           </p>
-
-
-
         </div>
         <div className="clear-both" />
       </div>
