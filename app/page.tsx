@@ -104,7 +104,7 @@ export default function HomePage() {
               width={256}
               height={320}
               className="rounded-xl border border-gray-100"
-              style={{ objectFit: "cover", objectPosition: "center top", width: "100%", maxWidth: "256px", height: "auto" }}
+              style={{ objectFit: "cover", objectPosition: "center top", width: "100%", maxWidth: "256px" }}
               priority
             />
           </div>
