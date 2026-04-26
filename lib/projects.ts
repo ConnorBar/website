@@ -80,7 +80,7 @@ export const projects: Project[] = [
   {
     title: "This website!",
     description:
-      "its pretty cool huh? check it out! the ai",
+      "its pretty cool huh? check it out!",
     tags: ["React", "MusicKit", "Redis"],
     github: "https://github.com/ConnorBar/website",
     demo: "https://cobars.space",

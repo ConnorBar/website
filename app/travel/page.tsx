@@ -15,7 +15,7 @@ export default function TravelPage() {
       {/* Header */}
       <div className="mb-10">
         <p className="mono text-sm mb-3" style={{ color: "var(--accent)" }}>
-          // travel
+          // travel ~ under construction
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-4">
           Places I&apos;ve been
