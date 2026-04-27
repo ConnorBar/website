@@ -78,7 +78,13 @@ export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
       const raw = await redis.get(REDIS_KEY);
       const cached: CachedTrack | null = raw ? JSON.parse(raw) : null;
 
-      if (!cached || cached.title !== firstTitle) {
+      if (!cached) {
+        // Cache expired — seed it but don't assume currently playing
+        const entry: CachedTrack = { title: firstTitle, seenAt: 0, durationInMillis };
+        await redis.set(REDIS_KEY, JSON.stringify(entry), { EX: 3600 });
+        isPlaying = false;
+      } else if (cached.title !== firstTitle) {
+        // New song detected — must be playing
         const entry: CachedTrack = { title: firstTitle, seenAt: Date.now(), durationInMillis };
         await redis.set(REDIS_KEY, JSON.stringify(entry), { EX: 3600 });
         isPlaying = true;
