@@ -47,7 +47,7 @@ export default async function TripPage({ params }: Props) {
       </Link>
 
       {/* Cover — photo if provided, otherwise emoji + color fallback */}
-      <div className="rounded-xl overflow-hidden mb-10" style={{ height: "280px" }}>
+      <div className="rounded-xl overflow-hidden mb-10" style={{ height: "380px" }}>
         {trip.coverImage ? (
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Image
