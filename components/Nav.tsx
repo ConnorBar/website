@@ -27,7 +27,7 @@ export function Nav() {
   return (
     <header style={{ backgroundColor: "var(--nav-bg)" }} className="sticky top-0 z-50">
       {/* Desktop */}
-      <div className="hidden sm:grid max-w-5xl mx-auto px-6 h-14 grid-cols-3 items-center">
+      <div className="hidden md:grid max-w-5xl mx-auto px-6 h-14 items-center" style={{ gridTemplateColumns: "auto 1fr auto" }}>
         <Link
           href="/"
           className="mono text-white text-sm font-medium tracking-tight hover:opacity-80 transition-opacity"
@@ -58,7 +58,7 @@ export function Nav() {
       </div>
 
       {/* Mobile */}
-      <div className="sm:hidden" ref={menuRef}>
+      <div className="md:hidden" ref={menuRef}>
         <div className="px-4 h-14 flex items-center justify-between gap-2">
           <Link
             href="/"

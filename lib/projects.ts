@@ -41,7 +41,7 @@ export const projects: Project[] = [
     description:
       "Real-time musical instrument that translates hand gestures and body pose into sound using MediaPipe pose estimation. Generates melodies from chords played using ML models constrained by music theory rules. Won 2nd place out of 70+ submitted projects at Purdue's Boilermake hackathon.",
     tags: ["MediaPipe", "JavaScript", "Magenta.js", "Tailwind CSS"],
-    github: "https://github.com/ConnorBar",
+    github: "https://github.com/plantarchy/theremin",
     demo: "https://boilertheremin.netlify.app/",
     featured: true,
     short_desc:

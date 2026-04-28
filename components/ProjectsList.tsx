@@ -11,7 +11,7 @@ function ProjectCard({ project: p }: { project: Project }) {
       <h3 className="font-medium text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
         {p.title}
       </h3>
-      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1 line-clamp-4">
         {p.short_desc ?? p.description}
       </p>
       <div className="flex flex-wrap gap-1.5 mb-4">
