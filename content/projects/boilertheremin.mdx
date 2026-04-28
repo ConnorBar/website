@@ -1,0 +1,13 @@
+---
+title: "Boilertheremin"
+---
+
+Built in 24 hours at Purdue's Boilermake hackathon. Won 2nd place out of 70+ submitted projects.
+
+The idea: what if you could play music just by moving your body? A theremin but with your whole skeleton.
+
+MediaPipe's pose estimation runs in real-time in the browser and tracks 33 body landmarks — hands, elbows, shoulders, hips, knees. We mapped combinations of joint positions and angles to musical inputs: hand height controls pitch, distance between hands controls volume, specific poses trigger chord changes.
+
+The melody generation layer uses Magenta.js — Google's music ML library — to generate notes that stay musically coherent. Instead of just letting any note play, the model is constrained by music theory rules so the output actually sounds good even when you're flailing around.
+
+The whole thing runs client-side with no server, which was a deliberate constraint. We wanted it to be instantaneous with zero latency — anything that had to round-trip to a server would have broken the feel of it as an instrument.
