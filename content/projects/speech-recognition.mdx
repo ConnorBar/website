@@ -1,0 +1,13 @@
+---
+title: "Chinese Speech Recognition"
+---
+
+Mandarin tone recognition is a hard problem — four tones plus a neutral, all mapped onto the same consonant-vowel pairs, and the meaning of a word completely changes depending on which tone you use. The goal here was to build a model that could identify tones reliably from raw audio.
+
+The dataset was 200,000 audio samples that needed preprocessing before any training could happen. The naive sequential pipeline was too slow, so I rewrote it with Python's multiprocessing module and cut preprocessing time by 81%, producing around 3 million train/val/test examples in the process.
+
+For segmentation I used [CTC Forced Alignment](https://docs.pytorch.org/audio/main/tutorials/ctc_forced_alignment_api_tutorial.html) to automatically detect phoneme boundaries — this let me cut audio at the right places without manual annotation.
+
+The model itself is a Multi-Task Learning setup: a ResNet backbone for feature extraction paired with an LSTM for sequence modeling. On top of the main tone classification task, I added Phonotactic Constraint Learning (using known rules about which sound combinations are valid in Mandarin) and Counterfactual Data Augmentation to make the model more robust to tone confusions.
+
+Learned alot since then and I would change a lot if I redid it - planning to revist this project soon and overhaul it...

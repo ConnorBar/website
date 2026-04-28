@@ -87,7 +87,7 @@ export default function HomePage() {
             <ul className="space-y-1.5">
               {[
                 "learning rust",
-                "making this site lol"
+                "making this site - constantly rolling out changes..."
               ].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
                   <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />

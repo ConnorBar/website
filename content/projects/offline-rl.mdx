@@ -1,0 +1,11 @@
+---
+title: "Offline RL for Robotic Manipulation"
+---
+
+Implementing Implicit Q-Learning (IQL) for offline reinforcement learning on the MARS Lab's multimodal robotic dataset — a setup that combines vision, tactile, force, and proprioceptive state signals from a real robot arm.
+
+The core challenge with offline RL is that you're learning from a fixed dataset with no environment interaction. IQL sidesteps the bootstrapping instability issues that make most offline RL algorithms tricky by never evaluating out-of-distribution actions directly — it fits a value function purely over observed data.
+
+On top of that I'm building the observation pipeline: encoding visual inputs with a frozen R3M ResNet18 (pretrained on human video with TCN), then fine-tuning the encoder online during policy learning so it adapts to the robot's specific visual context.
+
+The policy is then rolled out in a modified Isaac Gym simulation environment to evaluate learned behaviors without needing the physical robot in the loop.

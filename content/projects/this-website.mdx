@@ -1,0 +1,13 @@
+---
+title: "This Website"
+---
+
+Built with Next.js 14 App Router, deployed on Vercel, and has some pretty intersting stuff under the hood.
+
+The now-playing widget in the nav is the most involved part — Apple Music doesn't have a server-side "is playing right now" endpoint, so I built a Redis-backed heuristic: when a new song appears in the recently played API, timestamp it and compare elapsed time against the track's duration. If it's within the window, I am probably still listening to the song. If the song ends or I skip the song it will update my status live on the site.
+
+The travel section is MDX-based — each trip is a markdown file with frontmatter for metadata and a body for the write-up. Refactored the projects section to use the same pattern.
+
+Cloudflare sits in front of Vercel for caching and bot protection. Custom robots.txt blocks most AI crawlers. I also added a honeypot route that serves fake credentials and infinite pagination links to waste scrapers' time if they decide to ignore the scraping rules.
+
+The font stack is all system fonts — no external font loading, which keeps CLS low and first paint fast.

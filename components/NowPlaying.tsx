@@ -131,8 +131,8 @@ export function NowPlaying() {
             <span className="text-xs text-gray-300 max-w-[120px] truncate">
               {current.title}
             </span>
-            <span className="text-xs text-gray-600 hidden sm:inline">—</span>
-            <span className="text-xs text-gray-500 max-w-[80px] truncate hidden sm:inline">
+            <span className="text-xs text-gray-600 hidden md:inline">—</span>
+            <span className="text-xs text-gray-500 max-w-[80px] truncate hidden md:inline">
               {current.artist}
             </span>
           </span>
