@@ -47,13 +47,13 @@ export const projects: Project[] = [
   {
     title: "EasyEats (WIP)",
     description:
-      "This is for if you dont know what you can make with what u got in ur pantry",
+      "Kitchen inventory + recipe matching app. Track what's in your pantry, save recipes, and instantly see what you can actually make tonight. Completing a recipe auto-deducts ingredients to keep your inventory in sync. Planned features include grocery lists with per-store pricing, a drag-and-drop meal plan calendar, and smarter ways to import recipes and groceries.",
     tags: ["Flutter", "FastAPI", "MongoDB"],
     github: "https://github.com/ConnorBar/easyeats",
     featured: false,
-    // short_desc:
-    //   "All-in-one finance tracker. Blazing fast and secure.",
-    // short_tags: ["Rust", "TypeScript", "Plaid"],
+    short_desc:
+      "Pantry tracker + recipe matcher — see what you can cook tonight and auto-deduct ingredients when you do.",
+    short_tags: ["Flutter", "FastAPI", "MongoDB"],
   },
   {
     title: "E-Clair (WIP)",

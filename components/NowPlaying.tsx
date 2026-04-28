@@ -68,6 +68,7 @@ export function NowPlaying() {
     }
     load();
     const interval = setInterval(load, 10_000);
+    // const interval = setInterval(load, 30_000); // playing w cacheing
     return () => clearInterval(interval);
   }, []);
 
