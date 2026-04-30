@@ -1,0 +1,871 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "postcss.config.mjs",
+      "file_type": "code",
+      "source_file": "postcss.config.mjs",
+      "source_location": "L1",
+      "id": "postcss_config_mjs",
+      "community": 12,
+      "norm_label": "postcss.config.mjs"
+    },
+    {
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1",
+      "id": "next_env_d_ts",
+      "community": 13,
+      "norm_label": "next-env.d.ts"
+    },
+    {
+      "label": "eslint.config.mjs",
+      "file_type": "code",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L1",
+      "id": "eslint_config_mjs",
+      "community": 14,
+      "norm_label": "eslint.config.mjs"
+    },
+    {
+      "label": "next.config.ts",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L1",
+      "id": "next_config_ts",
+      "community": 15,
+      "norm_label": "next.config.ts"
+    },
+    {
+      "label": "robots.ts",
+      "file_type": "code",
+      "source_file": "app/robots.ts",
+      "source_location": "L1",
+      "id": "app_robots_ts",
+      "community": 5,
+      "norm_label": "robots.ts"
+    },
+    {
+      "label": "robots()",
+      "file_type": "code",
+      "source_file": "app/robots.ts",
+      "source_location": "L3",
+      "id": "app_robots_robots",
+      "community": 5,
+      "norm_label": "robots()"
+    },
+    {
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1",
+      "id": "app_layout_tsx",
+      "community": 16,
+      "norm_label": "layout.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/page.tsx",
+      "source_location": "L1",
+      "id": "app_page_tsx",
+      "community": 17,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/projects/page.tsx",
+      "source_location": "L1",
+      "id": "app_projects_page_tsx",
+      "community": 6,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "ProjectsPage()",
+      "file_type": "code",
+      "source_file": "app/projects/page.tsx",
+      "source_location": "L9",
+      "id": "projects_page_projectspage",
+      "community": 6,
+      "norm_label": "projectspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L1",
+      "id": "app_projects_slug_page_tsx",
+      "community": 2,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "generateStaticParams()",
+      "file_type": "code",
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L13",
+      "id": "slug_page_generatestaticparams",
+      "community": 1,
+      "norm_label": "generatestaticparams()"
+    },
+    {
+      "label": "generateMetadata()",
+      "file_type": "code",
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L18",
+      "id": "slug_page_generatemetadata",
+      "community": 1,
+      "norm_label": "generatemetadata()"
+    },
+    {
+      "label": "ProjectSlugPage()",
+      "file_type": "code",
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L28",
+      "id": "slug_page_projectslugpage",
+      "community": 2,
+      "norm_label": "projectslugpage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/trap/page.tsx",
+      "source_location": "L1",
+      "id": "app_trap_page_tsx",
+      "community": 18,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/work/page.tsx",
+      "source_location": "L1",
+      "id": "app_work_page_tsx",
+      "community": 7,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "AboutPage()",
+      "file_type": "code",
+      "source_file": "app/work/page.tsx",
+      "source_location": "L11",
+      "id": "work_page_aboutpage",
+      "community": 7,
+      "norm_label": "aboutpage()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "app/api/now-playing/route.ts",
+      "source_location": "L1",
+      "id": "app_api_now_playing_route_ts",
+      "community": 0,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "app/api/now-playing/route.ts",
+      "source_location": "L6",
+      "id": "now_playing_route_get",
+      "community": 0,
+      "norm_label": "get()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/d/page.tsx",
+      "source_location": "L1",
+      "id": "app_d_page_tsx",
+      "community": 19,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/travel/page.tsx",
+      "source_location": "L1",
+      "id": "app_travel_page_tsx",
+      "community": 1,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "TravelPage()",
+      "file_type": "code",
+      "source_file": "app/travel/page.tsx",
+      "source_location": "L10",
+      "id": "travel_page_travelpage",
+      "community": 1,
+      "norm_label": "travelpage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L1",
+      "id": "app_travel_slug_page_tsx",
+      "community": 1,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "Nav.tsx",
+      "file_type": "code",
+      "source_file": "components/Nav.tsx",
+      "source_location": "L1",
+      "id": "components_nav_tsx",
+      "community": 8,
+      "norm_label": "nav.tsx"
+    },
+    {
+      "label": "handleClick()",
+      "file_type": "code",
+      "source_file": "components/Nav.tsx",
+      "source_location": "L18",
+      "id": "components_nav_handleclick",
+      "community": 8,
+      "norm_label": "handleclick()"
+    },
+    {
+      "label": "ProjectModal.tsx",
+      "file_type": "code",
+      "source_file": "components/ProjectModal.tsx",
+      "source_location": "L1",
+      "id": "components_projectmodal_tsx",
+      "community": 9,
+      "norm_label": "projectmodal.tsx"
+    },
+    {
+      "label": "ProjectModal()",
+      "file_type": "code",
+      "source_file": "components/ProjectModal.tsx",
+      "source_location": "L17",
+      "id": "components_projectmodal_projectmodal",
+      "community": 9,
+      "norm_label": "projectmodal()"
+    },
+    {
+      "label": "ProjectsList.tsx",
+      "file_type": "code",
+      "source_file": "components/ProjectsList.tsx",
+      "source_location": "L1",
+      "id": "components_projectslist_tsx",
+      "community": 10,
+      "norm_label": "projectslist.tsx"
+    },
+    {
+      "label": "ProjectCard()",
+      "file_type": "code",
+      "source_file": "components/ProjectsList.tsx",
+      "source_location": "L4",
+      "id": "components_projectslist_projectcard",
+      "community": 10,
+      "norm_label": "projectcard()"
+    },
+    {
+      "label": "NowPlaying.tsx",
+      "file_type": "code",
+      "source_file": "components/NowPlaying.tsx",
+      "source_location": "L1",
+      "id": "components_nowplaying_tsx",
+      "community": 3,
+      "norm_label": "nowplaying.tsx"
+    },
+    {
+      "label": "load()",
+      "file_type": "code",
+      "source_file": "components/NowPlaying.tsx",
+      "source_location": "L32",
+      "id": "components_nowplaying_load",
+      "community": 3,
+      "norm_label": "load()"
+    },
+    {
+      "label": "handleClick()",
+      "file_type": "code",
+      "source_file": "components/NowPlaying.tsx",
+      "source_location": "L76",
+      "id": "components_nowplaying_handleclick",
+      "community": 3,
+      "norm_label": "handleclick()"
+    },
+    {
+      "label": "Photo.tsx",
+      "file_type": "code",
+      "source_file": "components/mdx/Photo.tsx",
+      "source_location": "L1",
+      "id": "components_mdx_photo_tsx",
+      "community": 20,
+      "norm_label": "photo.tsx"
+    },
+    {
+      "label": "components.tsx",
+      "file_type": "code",
+      "source_file": "components/mdx/components.tsx",
+      "source_location": "L1",
+      "id": "components_mdx_components_tsx",
+      "community": 21,
+      "norm_label": "components.tsx"
+    },
+    {
+      "label": "TripGrid.tsx",
+      "file_type": "code",
+      "source_file": "components/travel/TripGrid.tsx",
+      "source_location": "L1",
+      "id": "components_travel_tripgrid_tsx",
+      "community": 11,
+      "norm_label": "tripgrid.tsx"
+    },
+    {
+      "label": "cardStyle()",
+      "file_type": "code",
+      "source_file": "components/travel/TripGrid.tsx",
+      "source_location": "L19",
+      "id": "travel_tripgrid_cardstyle",
+      "community": 11,
+      "norm_label": "cardstyle()"
+    },
+    {
+      "label": "projects.ts",
+      "file_type": "code",
+      "source_file": "lib/projects.ts",
+      "source_location": "L1",
+      "id": "lib_projects_ts",
+      "community": 4,
+      "norm_label": "projects.ts"
+    },
+    {
+      "label": "getFeaturedProjects()",
+      "file_type": "code",
+      "source_file": "lib/projects.ts",
+      "source_location": "L102",
+      "id": "lib_projects_getfeaturedprojects",
+      "community": 4,
+      "norm_label": "getfeaturedprojects()"
+    },
+    {
+      "label": "getWIPProjects()",
+      "file_type": "code",
+      "source_file": "lib/projects.ts",
+      "source_location": "L114",
+      "id": "lib_projects_getwipprojects",
+      "community": 4,
+      "norm_label": "getwipprojects()"
+    },
+    {
+      "label": "redis.ts",
+      "file_type": "code",
+      "source_file": "lib/redis.ts",
+      "source_location": "L1",
+      "id": "lib_redis_ts",
+      "community": 0,
+      "norm_label": "redis.ts"
+    },
+    {
+      "label": "getRedis()",
+      "file_type": "code",
+      "source_file": "lib/redis.ts",
+      "source_location": "L19",
+      "id": "lib_redis_getredis",
+      "community": 0,
+      "norm_label": "getredis()"
+    },
+    {
+      "label": "work.ts",
+      "file_type": "code",
+      "source_file": "lib/work.ts",
+      "source_location": "L1",
+      "id": "lib_work_ts",
+      "community": 22,
+      "norm_label": "work.ts"
+    },
+    {
+      "label": "widgets.ts",
+      "file_type": "code",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L1",
+      "id": "lib_widgets_ts",
+      "community": 0,
+      "norm_label": "widgets.ts"
+    },
+    {
+      "label": "getAppleMusicRecentlyPlayed()",
+      "file_type": "code",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L28",
+      "id": "lib_widgets_getapplemusicrecentlyplayed",
+      "community": 0,
+      "norm_label": "getapplemusicrecentlyplayed()"
+    },
+    {
+      "label": "getSpotifyToken()",
+      "file_type": "code",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L114",
+      "id": "lib_widgets_getspotifytoken",
+      "community": 0,
+      "norm_label": "getspotifytoken()"
+    },
+    {
+      "label": "getSpotifyNowPlaying()",
+      "file_type": "code",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L136",
+      "id": "lib_widgets_getspotifynowplaying",
+      "community": 0,
+      "norm_label": "getspotifynowplaying()"
+    },
+    {
+      "label": "projects-content.ts",
+      "file_type": "code",
+      "source_file": "lib/projects-content.ts",
+      "source_location": "L1",
+      "id": "lib_projects_content_ts",
+      "community": 2,
+      "norm_label": "projects-content.ts"
+    },
+    {
+      "label": "getProjectContent()",
+      "file_type": "code",
+      "source_file": "lib/projects-content.ts",
+      "source_location": "L8",
+      "id": "lib_projects_content_getprojectcontent",
+      "community": 2,
+      "norm_label": "getprojectcontent()"
+    },
+    {
+      "label": "travel-types.ts",
+      "file_type": "code",
+      "source_file": "lib/travel-types.ts",
+      "source_location": "L1",
+      "id": "lib_travel_types_ts",
+      "community": 23,
+      "norm_label": "travel-types.ts"
+    },
+    {
+      "label": "mandarin.ts",
+      "file_type": "code",
+      "source_file": "lib/mandarin.ts",
+      "source_location": "L1",
+      "id": "lib_mandarin_ts",
+      "community": 24,
+      "norm_label": "mandarin.ts"
+    },
+    {
+      "label": "travel.ts",
+      "file_type": "code",
+      "source_file": "lib/travel.ts",
+      "source_location": "L1",
+      "id": "lib_travel_ts",
+      "community": 1,
+      "norm_label": "travel.ts"
+    },
+    {
+      "label": "getAllTrips()",
+      "file_type": "code",
+      "source_file": "lib/travel.ts",
+      "source_location": "L14",
+      "id": "lib_travel_getalltrips",
+      "community": 1,
+      "norm_label": "getalltrips()"
+    },
+    {
+      "label": "getTrip()",
+      "file_type": "code",
+      "source_file": "lib/travel.ts",
+      "source_location": "L53",
+      "id": "lib_travel_gettrip",
+      "community": 1,
+      "norm_label": "gettrip()"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/robots.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "app_robots_ts",
+      "_tgt": "app_robots_robots",
+      "source": "app_robots_ts",
+      "target": "app_robots_robots",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/projects/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "app_projects_page_tsx",
+      "_tgt": "projects_page_projectspage",
+      "source": "app_projects_page_tsx",
+      "target": "projects_page_projectspage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "app_projects_slug_page_tsx",
+      "_tgt": "slug_page_generatestaticparams",
+      "source": "app_projects_slug_page_tsx",
+      "target": "slug_page_generatestaticparams",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "app_projects_slug_page_tsx",
+      "_tgt": "slug_page_generatemetadata",
+      "source": "app_projects_slug_page_tsx",
+      "target": "slug_page_generatemetadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "app_projects_slug_page_tsx",
+      "_tgt": "slug_page_projectslugpage",
+      "source": "app_projects_slug_page_tsx",
+      "target": "slug_page_projectslugpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "app_travel_slug_page_tsx",
+      "_tgt": "slug_page_generatestaticparams",
+      "source": "slug_page_generatestaticparams",
+      "target": "app_travel_slug_page_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "slug_page_generatestaticparams",
+      "_tgt": "lib_travel_getalltrips",
+      "source": "slug_page_generatestaticparams",
+      "target": "lib_travel_getalltrips"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "app_travel_slug_page_tsx",
+      "_tgt": "slug_page_generatemetadata",
+      "source": "slug_page_generatemetadata",
+      "target": "app_travel_slug_page_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/travel/[slug]/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "slug_page_generatemetadata",
+      "_tgt": "lib_travel_gettrip",
+      "source": "slug_page_generatemetadata",
+      "target": "lib_travel_gettrip"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/projects/[slug]/page.tsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_src": "slug_page_projectslugpage",
+      "_tgt": "lib_projects_content_getprojectcontent",
+      "source": "slug_page_projectslugpage",
+      "target": "lib_projects_content_getprojectcontent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/work/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "app_work_page_tsx",
+      "_tgt": "work_page_aboutpage",
+      "source": "app_work_page_tsx",
+      "target": "work_page_aboutpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/now-playing/route.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_api_now_playing_route_ts",
+      "_tgt": "now_playing_route_get",
+      "source": "app_api_now_playing_route_ts",
+      "target": "now_playing_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "lib/widgets.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "lib_widgets_getapplemusicrecentlyplayed",
+      "_tgt": "now_playing_route_get",
+      "source": "now_playing_route_get",
+      "target": "lib_widgets_getapplemusicrecentlyplayed"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/travel/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "app_travel_page_tsx",
+      "_tgt": "travel_page_travelpage",
+      "source": "app_travel_page_tsx",
+      "target": "travel_page_travelpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/travel/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "travel_page_travelpage",
+      "_tgt": "lib_travel_getalltrips",
+      "source": "travel_page_travelpage",
+      "target": "lib_travel_getalltrips"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/Nav.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "components_nav_tsx",
+      "_tgt": "components_nav_handleclick",
+      "source": "components_nav_tsx",
+      "target": "components_nav_handleclick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ProjectModal.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "components_projectmodal_tsx",
+      "_tgt": "components_projectmodal_projectmodal",
+      "source": "components_projectmodal_tsx",
+      "target": "components_projectmodal_projectmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ProjectsList.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "components_projectslist_tsx",
+      "_tgt": "components_projectslist_projectcard",
+      "source": "components_projectslist_tsx",
+      "target": "components_projectslist_projectcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/NowPlaying.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_src": "components_nowplaying_tsx",
+      "_tgt": "components_nowplaying_load",
+      "source": "components_nowplaying_tsx",
+      "target": "components_nowplaying_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/NowPlaying.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "components_nowplaying_tsx",
+      "_tgt": "components_nowplaying_handleclick",
+      "source": "components_nowplaying_tsx",
+      "target": "components_nowplaying_handleclick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/travel/TripGrid.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "components_travel_tripgrid_tsx",
+      "_tgt": "travel_tripgrid_cardstyle",
+      "source": "components_travel_tripgrid_tsx",
+      "target": "travel_tripgrid_cardstyle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/projects.ts",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_src": "lib_projects_ts",
+      "_tgt": "lib_projects_getfeaturedprojects",
+      "source": "lib_projects_ts",
+      "target": "lib_projects_getfeaturedprojects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/projects.ts",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_src": "lib_projects_ts",
+      "_tgt": "lib_projects_getwipprojects",
+      "source": "lib_projects_ts",
+      "target": "lib_projects_getwipprojects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/redis.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "lib_redis_ts",
+      "_tgt": "lib_redis_getredis",
+      "source": "lib_redis_ts",
+      "target": "lib_redis_getredis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "lib/widgets.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "lib_widgets_getapplemusicrecentlyplayed",
+      "_tgt": "lib_redis_getredis",
+      "source": "lib_redis_getredis",
+      "target": "lib_widgets_getapplemusicrecentlyplayed"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "lib_widgets_ts",
+      "_tgt": "lib_widgets_getapplemusicrecentlyplayed",
+      "source": "lib_widgets_ts",
+      "target": "lib_widgets_getapplemusicrecentlyplayed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_src": "lib_widgets_ts",
+      "_tgt": "lib_widgets_getspotifytoken",
+      "source": "lib_widgets_ts",
+      "target": "lib_widgets_getspotifytoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_src": "lib_widgets_ts",
+      "_tgt": "lib_widgets_getspotifynowplaying",
+      "source": "lib_widgets_ts",
+      "target": "lib_widgets_getspotifynowplaying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/widgets.ts",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_src": "lib_widgets_getspotifynowplaying",
+      "_tgt": "lib_widgets_getspotifytoken",
+      "source": "lib_widgets_getspotifytoken",
+      "target": "lib_widgets_getspotifynowplaying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/projects-content.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "lib_projects_content_ts",
+      "_tgt": "lib_projects_content_getprojectcontent",
+      "source": "lib_projects_content_ts",
+      "target": "lib_projects_content_getprojectcontent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/travel.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "lib_travel_ts",
+      "_tgt": "lib_travel_getalltrips",
+      "source": "lib_travel_ts",
+      "target": "lib_travel_getalltrips",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/travel.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "lib_travel_ts",
+      "_tgt": "lib_travel_gettrip",
+      "source": "lib_travel_ts",
+      "target": "lib_travel_gettrip",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}
