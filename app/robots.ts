@@ -7,7 +7,6 @@ export default function robots(): MetadataRoute.Robots {
         // Legitimate crawlers
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/trap"],
       },
       // AI scrapers — disallow everything
       { userAgent: "GPTBot", disallow: "/" },
