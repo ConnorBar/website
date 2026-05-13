@@ -43,7 +43,7 @@ export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
       "https://api.music.apple.com/v1/me/recent/played/tracks?limit=5",
       { headers, cache: "no-store" }
     );
-    console.log(recentRes);
+    // console.log(recentRes);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapAppleTrack = (item: any): Track => ({
@@ -58,9 +58,13 @@ export async function getAppleMusicRecentlyPlayed(): Promise<NowPlayingData> {
 
     const recentData = recentRes.ok ? await recentRes.json() : null;
 
+
     // recentData?.data?.forEach((item: any, index: number) => {
     //   console.log(index, item.attributes)
     // })
+
+    const song = recentData?.data[0]
+    console.log(song)
 
     const recent: Track[] = (recentData?.data ?? []).map(mapAppleTrack);
 

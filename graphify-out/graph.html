@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>graphify - graphify-out/graph.html</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
+  #search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
+  .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .search-item:hover { background: #2a2a4e; }
+  #info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: #e0e0e0; }
+  #info-content .empty { color: #555; font-style: italic; }
+  .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid #333; }
+  .neighbor-link:hover { background: #2a2a4e; }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
+  .legend-item:hover { background: #2a2a4e; padding-left: 4px; }
+  .legend-item.dimmed { opacity: 0.35; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count { color: #666; font-size: 11px; }
+  #stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
+  #legend-controls { display: flex; gap: 6px; margin-bottom: 8px; }
+  #legend-controls button { flex: 1; background: #0f0f1a; border: 1px solid #3a3a5e; color: #aaa; padding: 4px 0; border-radius: 4px; font-size: 11px; cursor: pointer; }
+  #legend-controls button:hover { border-color: #4E79A7; color: #e0e0e0; }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<div id="sidebar">
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="info-panel">
+    <h3>Node Info</h3>
+    <div id="info-content"><span class="empty">Click a node to inspect it</span></div>
+  </div>
+  <div id="legend-wrap">
+    <h3>Communities</h3>
+    <div id="legend-controls">
+      <button onclick="toggleAllCommunities(false)">Show All</button>
+      <button onclick="toggleAllCommunities(true)">Hide All</button>
+    </div>
+    <div id="legend"></div>
+  </div>
+  <div id="stats">53 nodes &middot; 32 edges &middot; 25 communities</div>
+</div>
+<script>
+const RAW_NODES = [{"id": "postcss_config_mjs", "label": "postcss.config.mjs", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "postcss.config.mjs", "community": 12, "community_name": "Community 12", "source_file": "postcss.config.mjs", "file_type": "code", "degree": 0}, {"id": "next_env_d_ts", "label": "next-env.d.ts", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "next-env.d.ts", "community": 13, "community_name": "Community 13", "source_file": "next-env.d.ts", "file_type": "code", "degree": 0}, {"id": "eslint_config_mjs", "label": "eslint.config.mjs", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "eslint.config.mjs", "community": 14, "community_name": "Community 14", "source_file": "eslint.config.mjs", "file_type": "code", "degree": 0}, {"id": "next_config_ts", "label": "next.config.ts", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "next.config.ts", "community": 15, "community_name": "Community 15", "source_file": "next.config.ts", "file_type": "code", "degree": 0}, {"id": "app_robots_ts", "label": "robots.ts", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "robots.ts", "community": 5, "community_name": "Community 5", "source_file": "app/robots.ts", "file_type": "code", "degree": 1}, {"id": "app_robots_robots", "label": "robots()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "robots()", "community": 5, "community_name": "Community 5", "source_file": "app/robots.ts", "file_type": "code", "degree": 1}, {"id": "app_layout_tsx", "label": "layout.tsx", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "layout.tsx", "community": 16, "community_name": "Community 16", "source_file": "app/layout.tsx", "file_type": "code", "degree": 0}, {"id": "app_page_tsx", "label": "page.tsx", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "page.tsx", "community": 17, "community_name": "Community 17", "source_file": "app/page.tsx", "file_type": "code", "degree": 0}, {"id": "app_projects_page_tsx", "label": "page.tsx", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "page.tsx", "community": 6, "community_name": "Community 6", "source_file": "app/projects/page.tsx", "file_type": "code", "degree": 1}, {"id": "projects_page_projectspage", "label": "ProjectsPage()", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectsPage()", "community": 6, "community_name": "Community 6", "source_file": "app/projects/page.tsx", "file_type": "code", "degree": 1}, {"id": "app_projects_slug_page_tsx", "label": "page.tsx", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "page.tsx", "community": 2, "community_name": "Community 2", "source_file": "app/projects/[slug]/page.tsx", "file_type": "code", "degree": 3}, {"id": "slug_page_generatestaticparams", "label": "generateStaticParams()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "generateStaticParams()", "community": 1, "community_name": "Community 1", "source_file": "app/travel/[slug]/page.tsx", "file_type": "code", "degree": 3}, {"id": "slug_page_generatemetadata", "label": "generateMetadata()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "generateMetadata()", "community": 1, "community_name": "Community 1", "source_file": "app/travel/[slug]/page.tsx", "file_type": "code", "degree": 3}, {"id": "slug_page_projectslugpage", "label": "ProjectSlugPage()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectSlugPage()", "community": 2, "community_name": "Community 2", "source_file": "app/projects/[slug]/page.tsx", "file_type": "code", "degree": 2}, {"id": "app_trap_page_tsx", "label": "page.tsx", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "page.tsx", "community": 18, "community_name": "Community 18", "source_file": "app/trap/page.tsx", "file_type": "code", "degree": 0}, {"id": "app_work_page_tsx", "label": "page.tsx", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "page.tsx", "community": 7, "community_name": "Community 7", "source_file": "app/work/page.tsx", "file_type": "code", "degree": 1}, {"id": "work_page_aboutpage", "label": "AboutPage()", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "AboutPage()", "community": 7, "community_name": "Community 7", "source_file": "app/work/page.tsx", "file_type": "code", "degree": 1}, {"id": "app_api_now_playing_route_ts", "label": "route.ts", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "route.ts", "community": 0, "community_name": "Community 0", "source_file": "app/api/now-playing/route.ts", "file_type": "code", "degree": 1}, {"id": "now_playing_route_get", "label": "GET()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "GET()", "community": 0, "community_name": "Community 0", "source_file": "app/api/now-playing/route.ts", "file_type": "code", "degree": 2}, {"id": "app_d_page_tsx", "label": "page.tsx", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "page.tsx", "community": 19, "community_name": "Community 19", "source_file": "app/d/page.tsx", "file_type": "code", "degree": 0}, {"id": "app_travel_page_tsx", "label": "page.tsx", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "page.tsx", "community": 1, "community_name": "Community 1", "source_file": "app/travel/page.tsx", "file_type": "code", "degree": 1}, {"id": "travel_page_travelpage", "label": "TravelPage()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "TravelPage()", "community": 1, "community_name": "Community 1", "source_file": "app/travel/page.tsx", "file_type": "code", "degree": 2}, {"id": "app_travel_slug_page_tsx", "label": "page.tsx", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "page.tsx", "community": 1, "community_name": "Community 1", "source_file": "app/travel/[slug]/page.tsx", "file_type": "code", "degree": 2}, {"id": "components_nav_tsx", "label": "Nav.tsx", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "Nav.tsx", "community": 8, "community_name": "Community 8", "source_file": "components/Nav.tsx", "file_type": "code", "degree": 1}, {"id": "components_nav_handleclick", "label": "handleClick()", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "handleClick()", "community": 8, "community_name": "Community 8", "source_file": "components/Nav.tsx", "file_type": "code", "degree": 1}, {"id": "components_projectmodal_tsx", "label": "ProjectModal.tsx", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectModal.tsx", "community": 9, "community_name": "Community 9", "source_file": "components/ProjectModal.tsx", "file_type": "code", "degree": 1}, {"id": "components_projectmodal_projectmodal", "label": "ProjectModal()", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectModal()", "community": 9, "community_name": "Community 9", "source_file": "components/ProjectModal.tsx", "file_type": "code", "degree": 1}, {"id": "components_projectslist_tsx", "label": "ProjectsList.tsx", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectsList.tsx", "community": 10, "community_name": "Community 10", "source_file": "components/ProjectsList.tsx", "file_type": "code", "degree": 1}, {"id": "components_projectslist_projectcard", "label": "ProjectCard()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ProjectCard()", "community": 10, "community_name": "Community 10", "source_file": "components/ProjectsList.tsx", "file_type": "code", "degree": 1}, {"id": "components_nowplaying_tsx", "label": "NowPlaying.tsx", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "NowPlaying.tsx", "community": 3, "community_name": "Community 3", "source_file": "components/NowPlaying.tsx", "file_type": "code", "degree": 2}, {"id": "components_nowplaying_load", "label": "load()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "load()", "community": 3, "community_name": "Community 3", "source_file": "components/NowPlaying.tsx", "file_type": "code", "degree": 1}, {"id": "components_nowplaying_handleclick", "label": "handleClick()", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "handleClick()", "community": 3, "community_name": "Community 3", "source_file": "components/NowPlaying.tsx", "file_type": "code", "degree": 1}, {"id": "components_mdx_photo_tsx", "label": "Photo.tsx", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Photo.tsx", "community": 20, "community_name": "Community 20", "source_file": "components/mdx/Photo.tsx", "file_type": "code", "degree": 0}, {"id": "components_mdx_components_tsx", "label": "components.tsx", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "components.tsx", "community": 21, "community_name": "Community 21", "source_file": "components/mdx/components.tsx", "file_type": "code", "degree": 0}, {"id": "components_travel_tripgrid_tsx", "label": "TripGrid.tsx", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "TripGrid.tsx", "community": 11, "community_name": "Community 11", "source_file": "components/travel/TripGrid.tsx", "file_type": "code", "degree": 1}, {"id": "travel_tripgrid_cardstyle", "label": "cardStyle()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "cardStyle()", "community": 11, "community_name": "Community 11", "source_file": "components/travel/TripGrid.tsx", "file_type": "code", "degree": 1}, {"id": "lib_projects_ts", "label": "projects.ts", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "projects.ts", "community": 4, "community_name": "Community 4", "source_file": "lib/projects.ts", "file_type": "code", "degree": 2}, {"id": "lib_projects_getfeaturedprojects", "label": "getFeaturedProjects()", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getFeaturedProjects()", "community": 4, "community_name": "Community 4", "source_file": "lib/projects.ts", "file_type": "code", "degree": 1}, {"id": "lib_projects_getwipprojects", "label": "getWIPProjects()", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getWIPProjects()", "community": 4, "community_name": "Community 4", "source_file": "lib/projects.ts", "file_type": "code", "degree": 1}, {"id": "lib_redis_ts", "label": "redis.ts", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "redis.ts", "community": 0, "community_name": "Community 0", "source_file": "lib/redis.ts", "file_type": "code", "degree": 1}, {"id": "lib_redis_getredis", "label": "getRedis()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getRedis()", "community": 0, "community_name": "Community 0", "source_file": "lib/redis.ts", "file_type": "code", "degree": 2}, {"id": "lib_work_ts", "label": "work.ts", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "work.ts", "community": 22, "community_name": "Community 22", "source_file": "lib/work.ts", "file_type": "code", "degree": 0}, {"id": "lib_widgets_ts", "label": "widgets.ts", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "widgets.ts", "community": 0, "community_name": "Community 0", "source_file": "lib/widgets.ts", "file_type": "code", "degree": 3}, {"id": "lib_widgets_getapplemusicrecentlyplayed", "label": "getAppleMusicRecentlyPlayed()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getAppleMusicRecentlyPlayed()", "community": 0, "community_name": "Community 0", "source_file": "lib/widgets.ts", "file_type": "code", "degree": 3}, {"id": "lib_widgets_getspotifytoken", "label": "getSpotifyToken()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getSpotifyToken()", "community": 0, "community_name": "Community 0", "source_file": "lib/widgets.ts", "file_type": "code", "degree": 2}, {"id": "lib_widgets_getspotifynowplaying", "label": "getSpotifyNowPlaying()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getSpotifyNowPlaying()", "community": 0, "community_name": "Community 0", "source_file": "lib/widgets.ts", "file_type": "code", "degree": 2}, {"id": "lib_projects_content_ts", "label": "projects-content.ts", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 20.0, "font": {"size": 12, "color": "#ffffff"}, "title": "projects-content.ts", "community": 2, "community_name": "Community 2", "source_file": "lib/projects-content.ts", "file_type": "code", "degree": 1}, {"id": "lib_projects_content_getprojectcontent", "label": "getProjectContent()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getProjectContent()", "community": 2, "community_name": "Community 2", "source_file": "lib/projects-content.ts", "file_type": "code", "degree": 2}, {"id": "lib_travel_types_ts", "label": "travel-types.ts", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "travel-types.ts", "community": 23, "community_name": "Community 23", "source_file": "lib/travel-types.ts", "file_type": "code", "degree": 0}, {"id": "lib_mandarin_ts", "label": "mandarin.ts", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "mandarin.ts", "community": 24, "community_name": "Community 24", "source_file": "lib/mandarin.ts", "file_type": "code", "degree": 0}, {"id": "lib_travel_ts", "label": "travel.ts", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "travel.ts", "community": 1, "community_name": "Community 1", "source_file": "lib/travel.ts", "file_type": "code", "degree": 2}, {"id": "lib_travel_getalltrips", "label": "getAllTrips()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getAllTrips()", "community": 1, "community_name": "Community 1", "source_file": "lib/travel.ts", "file_type": "code", "degree": 3}, {"id": "lib_travel_gettrip", "label": "getTrip()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 30.0, "font": {"size": 12, "color": "#ffffff"}, "title": "getTrip()", "community": 1, "community_name": "Community 1", "source_file": "lib/travel.ts", "file_type": "code", "degree": 2}];
+const RAW_EDGES = [{"from": "app_robots_ts", "to": "app_robots_robots", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "app_projects_page_tsx", "to": "projects_page_projectspage", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "app_projects_slug_page_tsx", "to": "slug_page_generatestaticparams", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "app_projects_slug_page_tsx", "to": "slug_page_generatemetadata", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "app_projects_slug_page_tsx", "to": "slug_page_projectslugpage", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "slug_page_generatestaticparams", "to": "app_travel_slug_page_tsx", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "slug_page_generatestaticparams", "to": "lib_travel_getalltrips", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "slug_page_generatemetadata", "to": "app_travel_slug_page_tsx", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "slug_page_generatemetadata", "to": "lib_travel_gettrip", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "slug_page_projectslugpage", "to": "lib_projects_content_getprojectcontent", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "app_work_page_tsx", "to": "work_page_aboutpage", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "app_api_now_playing_route_ts", "to": "now_playing_route_get", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "now_playing_route_get", "to": "lib_widgets_getapplemusicrecentlyplayed", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "app_travel_page_tsx", "to": "travel_page_travelpage", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "travel_page_travelpage", "to": "lib_travel_getalltrips", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "components_nav_tsx", "to": "components_nav_handleclick", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "components_projectmodal_tsx", "to": "components_projectmodal_projectmodal", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "components_projectslist_tsx", "to": "components_projectslist_projectcard", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "components_nowplaying_tsx", "to": "components_nowplaying_load", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "components_nowplaying_tsx", "to": "components_nowplaying_handleclick", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "components_travel_tripgrid_tsx", "to": "travel_tripgrid_cardstyle", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_projects_ts", "to": "lib_projects_getfeaturedprojects", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_projects_ts", "to": "lib_projects_getwipprojects", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_redis_ts", "to": "lib_redis_getredis", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_redis_getredis", "to": "lib_widgets_getapplemusicrecentlyplayed", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "lib_widgets_ts", "to": "lib_widgets_getapplemusicrecentlyplayed", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_widgets_ts", "to": "lib_widgets_getspotifytoken", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_widgets_ts", "to": "lib_widgets_getspotifynowplaying", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_widgets_getspotifytoken", "to": "lib_widgets_getspotifynowplaying", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_projects_content_ts", "to": "lib_projects_content_getprojectcontent", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_travel_ts", "to": "lib_travel_getalltrips", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "lib_travel_ts", "to": "lib_travel_gettrip", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}];
+const LEGEND = [{"cid": 0, "color": "#4E79A7", "label": "Community 0", "count": 8}, {"cid": 1, "color": "#F28E2B", "label": "Community 1", "count": 8}, {"cid": 2, "color": "#E15759", "label": "Community 2", "count": 4}, {"cid": 3, "color": "#76B7B2", "label": "Community 3", "count": 3}, {"cid": 4, "color": "#59A14F", "label": "Community 4", "count": 3}, {"cid": 5, "color": "#EDC948", "label": "Community 5", "count": 2}, {"cid": 6, "color": "#B07AA1", "label": "Community 6", "count": 2}, {"cid": 7, "color": "#FF9DA7", "label": "Community 7", "count": 2}, {"cid": 8, "color": "#9C755F", "label": "Community 8", "count": 2}, {"cid": 9, "color": "#BAB0AC", "label": "Community 9", "count": 2}, {"cid": 10, "color": "#4E79A7", "label": "Community 10", "count": 2}, {"cid": 11, "color": "#F28E2B", "label": "Community 11", "count": 2}, {"cid": 12, "color": "#E15759", "label": "Community 12", "count": 1}, {"cid": 13, "color": "#76B7B2", "label": "Community 13", "count": 1}, {"cid": 14, "color": "#59A14F", "label": "Community 14", "count": 1}, {"cid": 15, "color": "#EDC948", "label": "Community 15", "count": 1}, {"cid": 16, "color": "#B07AA1", "label": "Community 16", "count": 1}, {"cid": 17, "color": "#FF9DA7", "label": "Community 17", "count": 1}, {"cid": 18, "color": "#9C755F", "label": "Community 18", "count": 1}, {"cid": 19, "color": "#BAB0AC", "label": "Community 19", "count": 1}, {"cid": 20, "color": "#4E79A7", "label": "Community 20", "count": 1}, {"cid": 21, "color": "#F28E2B", "label": "Community 21", "count": 1}, {"cid": 22, "color": "#E15759", "label": "Community 22", "count": 1}, {"cid": 23, "color": "#76B7B2", "label": "Community 23", "count": 1}, {"cid": 24, "color": "#59A14F", "label": "Community 24", "count": 1}];
+
+// HTML-escape helper — prevents XSS when injecting graph data into innerHTML
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build vis datasets
+const nodesDS = new vis.DataSet(RAW_NODES.map(n => ({
+  id: n.id, label: n.label, color: n.color, size: n.size,
+  font: n.font, title: n.title,
+  _community: n.community, _community_name: n.community_name,
+  _source_file: n.source_file, _file_type: n.file_type, _degree: n.degree,
+})));
+
+const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
+  id: i, from: e.from, to: e.to,
+  label: '',
+  title: e.title,
+  dashes: e.dashes,
+  width: e.width,
+  color: e.color,
+  arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+})));
+
+const container = document.getElementById('graph');
+const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -60,
+      centralGravity: 0.005,
+      springLength: 120,
+      springConstant: 0.08,
+      damping: 0.4,
+      avoidOverlap: 0.8,
+    },
+    stabilization: { iterations: 200, fit: true },
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 100,
+    hideEdgesOnDrag: true,
+    navigationButtons: false,
+    keyboard: false,
+  },
+  nodes: { shape: 'dot', borderWidth: 1.5 },
+  edges: { smooth: { type: 'continuous', roundness: 0.2 }, selectionWidth: 3 },
+});
+
+network.once('stabilizationIterationsDone', () => {
+  network.setOptions({ physics: { enabled: false } });
+});
+
+function showInfo(nodeId) {
+  const n = nodesDS.get(nodeId);
+  if (!n) return;
+  const neighborIds = network.getConnectedNodes(nodeId);
+  const neighborItems = neighborIds.map(nid => {
+    const nb = nodesDS.get(nid);
+    const color = nb ? nb.color.background : '#555';
+    return `<span class="neighbor-link" style="border-left-color:${esc(color)}" onclick="focusNode(${JSON.stringify(nid)})">${esc(nb ? nb.label : nid)}</span>`;
+  }).join('');
+  document.getElementById('info-content').innerHTML = `
+    <div class="field"><b>${esc(n.label)}</b></div>
+    <div class="field">Type: ${esc(n._file_type || 'unknown')}</div>
+    <div class="field">Community: ${esc(n._community_name)}</div>
+    <div class="field">Source: ${esc(n._source_file || '-')}</div>
+    <div class="field">Degree: ${n._degree}</div>
+    ${neighborIds.length ? `<div class="field" style="margin-top:8px;color:#aaa;font-size:11px">Neighbors (${neighborIds.length})</div><div id="neighbors-list">${neighborItems}</div>` : ''}
+  `;
+}
+
+function focusNode(nodeId) {
+  network.focus(nodeId, { scale: 1.4, animation: true });
+  network.selectNodes([nodeId]);
+  showInfo(nodeId);
+}
+
+// Track hovered node — hover detection is more reliable than click params
+let hoveredNodeId = null;
+network.on('hoverNode', params => {
+  hoveredNodeId = params.node;
+  container.style.cursor = 'pointer';
+});
+network.on('blurNode', () => {
+  hoveredNodeId = null;
+  container.style.cursor = 'default';
+});
+container.addEventListener('click', () => {
+  if (hoveredNodeId !== null) {
+    showInfo(hoveredNodeId);
+    network.selectNodes([hoveredNodeId]);
+  }
+});
+network.on('click', params => {
+  if (params.nodes.length > 0) {
+    showInfo(params.nodes[0]);
+  } else if (hoveredNodeId === null) {
+    document.getElementById('info-content').innerHTML = '<span class="empty">Click a node to inspect it</span>';
+  }
+});
+
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = RAW_NODES.filter(n => n.label.toLowerCase().includes(q)).slice(0, 20);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  matches.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'search-item';
+    el.textContent = n.label;
+    el.style.borderLeft = `3px solid ${n.color.background}`;
+    el.style.paddingLeft = '8px';
+    el.onclick = () => {
+      network.focus(n.id, { scale: 1.5, animation: true });
+      network.selectNodes([n.id]);
+      showInfo(n.id);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    };
+    searchResults.appendChild(el);
+  });
+});
+document.addEventListener('click', e => {
+  if (!searchResults.contains(e.target) && e.target !== searchInput)
+    searchResults.style.display = 'none';
+});
+
+const hiddenCommunities = new Set();
+
+function toggleAllCommunities(hide) {
+  document.querySelectorAll('.legend-item').forEach(item => {
+    hide ? item.classList.add('dimmed') : item.classList.remove('dimmed');
+  });
+  LEGEND.forEach(c => {
+    if (hide) hiddenCommunities.add(c.cid); else hiddenCommunities.delete(c.cid);
+  });
+  const updates = RAW_NODES.map(n => ({ id: n.id, hidden: hide }));
+  nodesDS.update(updates);
+}
+
+const legendEl = document.getElementById('legend');
+LEGEND.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>
+    <span class="legend-label">${c.label}</span>
+    <span class="legend-count">${c.count}</span>`;
+  item.onclick = () => {
+    if (hiddenCommunities.has(c.cid)) {
+      hiddenCommunities.delete(c.cid);
+      item.classList.remove('dimmed');
+    } else {
+      hiddenCommunities.add(c.cid);
+      item.classList.add('dimmed');
+    }
+    const updates = RAW_NODES
+      .filter(n => n.community === c.cid)
+      .map(n => ({ id: n.id, hidden: hiddenCommunities.has(c.cid) }));
+    nodesDS.update(updates);
+  };
+  legendEl.appendChild(item);
+});
+</script>
+<script>
+// Render hyperedges as shaded regions
+const hyperedges = [];
+// afterDrawing passes ctx already transformed to network coordinate space.
+// Draw node positions raw — no manual pan/zoom/DPR math needed.
+network.on('afterDrawing', function(ctx) {
+    hyperedges.forEach(h => {
+        const positions = h.nodes
+            .map(nid => network.getPositions([nid])[nid])
+            .filter(p => p !== undefined);
+        if (positions.length < 2) return;
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = '#6366f1';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Centroid and expanded hull in network coordinates
+        const cx = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+        const cy = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+        const expanded = positions.map(p => ({
+            x: cx + (p.x - cx) * 1.15,
+            y: cy + (p.y - cy) * 1.15
+        }));
+        ctx.moveTo(expanded[0].x, expanded[0].y);
+        expanded.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        // Label
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#4f46e5';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(h.label, cx, cy - 5);
+        ctx.restore();
+    });
+});
+</script>
+</body>
+</html>

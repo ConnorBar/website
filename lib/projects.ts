@@ -25,7 +25,7 @@ export const projects: Project[] = [
   },
   {
     slug: "speech-recognition",
-    title: "Chinese Speech Recognition",
+    title: "Mandarin Speech Recognition",
     description:
       "Optimized audio preprocessing with a multiprocessing pipeline, achieving an 81% speedup across 200,000 audio samples and yielding 3 million training/testing/validation examples. Leveraged CTC Forced Alignment for automatic sentence segmentation and phoneme boundary detection. Developed a Multi-Task Learning model using a ResNet + LSTM integrating Phonotactic Constraint Learning and Counterfactual Data Augmentation.",
     tags: ["PyTorch", "PyTorch Lightning", "Librosa", "Pandas", "Python"],

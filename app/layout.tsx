@@ -25,8 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col">
-        {/* honeypot — invisible to humans, logged when bots follow it */}
-        <a href="/trap" style={{ display: "none" }} aria-hidden="true" tabIndex={-1}>sitemap</a>
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
