@@ -9,7 +9,7 @@
       "source_file": "postcss.config.mjs",
       "source_location": "L1",
       "id": "postcss_config_mjs",
-      "community": 12,
+      "community": 13,
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "next-env.d.ts",
       "source_location": "L1",
       "id": "next_env_d_ts",
-      "community": 13,
+      "community": 14,
       "norm_label": "next-env.d.ts"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "eslint.config.mjs",
       "source_location": "L1",
       "id": "eslint_config_mjs",
-      "community": 14,
+      "community": 15,
       "norm_label": "eslint.config.mjs"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "next.config.ts",
       "source_location": "L1",
       "id": "next_config_ts",
-      "community": 15,
+      "community": 16,
       "norm_label": "next.config.ts"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "app/robots.ts",
       "source_location": "L1",
       "id": "app_robots_ts",
-      "community": 5,
+      "community": 6,
       "norm_label": "robots.ts"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "app/robots.ts",
       "source_location": "L3",
       "id": "app_robots_robots",
-      "community": 5,
+      "community": 6,
       "norm_label": "robots()"
     },
     {
@@ -63,8 +63,26 @@
       "source_file": "app/layout.tsx",
       "source_location": "L1",
       "id": "app_layout_tsx",
-      "community": 16,
+      "community": 3,
       "norm_label": "layout.tsx"
+    },
+    {
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L20",
+      "id": "app_layout_rootlayout",
+      "community": 3,
+      "norm_label": "rootlayout()"
+    },
+    {
+      "label": "Footer()",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L38",
+      "id": "app_layout_footer",
+      "community": 3,
+      "norm_label": "footer()"
     },
     {
       "label": "page.tsx",
@@ -81,7 +99,7 @@
       "source_file": "app/projects/page.tsx",
       "source_location": "L1",
       "id": "app_projects_page_tsx",
-      "community": 6,
+      "community": 7,
       "norm_label": "page.tsx"
     },
     {
@@ -90,7 +108,7 @@
       "source_file": "app/projects/page.tsx",
       "source_location": "L9",
       "id": "projects_page_projectspage",
-      "community": 6,
+      "community": 7,
       "norm_label": "projectspage()"
     },
     {
@@ -99,7 +117,7 @@
       "source_file": "app/projects/[slug]/page.tsx",
       "source_location": "L1",
       "id": "app_projects_slug_page_tsx",
-      "community": 2,
+      "community": 1,
       "norm_label": "page.tsx"
     },
     {
@@ -126,17 +144,8 @@
       "source_file": "app/projects/[slug]/page.tsx",
       "source_location": "L28",
       "id": "slug_page_projectslugpage",
-      "community": 2,
+      "community": 1,
       "norm_label": "projectslugpage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "app/trap/page.tsx",
-      "source_location": "L1",
-      "id": "app_trap_page_tsx",
-      "community": 18,
-      "norm_label": "page.tsx"
     },
     {
       "label": "page.tsx",
@@ -144,7 +153,7 @@
       "source_file": "app/work/page.tsx",
       "source_location": "L1",
       "id": "app_work_page_tsx",
-      "community": 7,
+      "community": 8,
       "norm_label": "page.tsx"
     },
     {
@@ -153,7 +162,7 @@
       "source_file": "app/work/page.tsx",
       "source_location": "L11",
       "id": "work_page_aboutpage",
-      "community": 7,
+      "community": 8,
       "norm_label": "aboutpage()"
     },
     {
@@ -180,7 +189,7 @@
       "source_file": "app/d/page.tsx",
       "source_location": "L1",
       "id": "app_d_page_tsx",
-      "community": 19,
+      "community": 18,
       "norm_label": "page.tsx"
     },
     {
@@ -189,7 +198,7 @@
       "source_file": "app/travel/page.tsx",
       "source_location": "L1",
       "id": "app_travel_page_tsx",
-      "community": 1,
+      "community": 2,
       "norm_label": "page.tsx"
     },
     {
@@ -198,7 +207,7 @@
       "source_file": "app/travel/page.tsx",
       "source_location": "L10",
       "id": "travel_page_travelpage",
-      "community": 1,
+      "community": 2,
       "norm_label": "travelpage()"
     },
     {
@@ -216,7 +225,7 @@
       "source_file": "components/Nav.tsx",
       "source_location": "L1",
       "id": "components_nav_tsx",
-      "community": 8,
+      "community": 9,
       "norm_label": "nav.tsx"
     },
     {
@@ -225,7 +234,7 @@
       "source_file": "components/Nav.tsx",
       "source_location": "L18",
       "id": "components_nav_handleclick",
-      "community": 8,
+      "community": 9,
       "norm_label": "handleclick()"
     },
     {
@@ -234,7 +243,7 @@
       "source_file": "components/ProjectModal.tsx",
       "source_location": "L1",
       "id": "components_projectmodal_tsx",
-      "community": 9,
+      "community": 10,
       "norm_label": "projectmodal.tsx"
     },
     {
@@ -243,7 +252,7 @@
       "source_file": "components/ProjectModal.tsx",
       "source_location": "L17",
       "id": "components_projectmodal_projectmodal",
-      "community": 9,
+      "community": 10,
       "norm_label": "projectmodal()"
     },
     {
@@ -252,7 +261,7 @@
       "source_file": "components/ProjectsList.tsx",
       "source_location": "L1",
       "id": "components_projectslist_tsx",
-      "community": 10,
+      "community": 11,
       "norm_label": "projectslist.tsx"
     },
     {
@@ -261,7 +270,7 @@
       "source_file": "components/ProjectsList.tsx",
       "source_location": "L4",
       "id": "components_projectslist_projectcard",
-      "community": 10,
+      "community": 11,
       "norm_label": "projectcard()"
     },
     {
@@ -270,7 +279,7 @@
       "source_file": "components/NowPlaying.tsx",
       "source_location": "L1",
       "id": "components_nowplaying_tsx",
-      "community": 3,
+      "community": 4,
       "norm_label": "nowplaying.tsx"
     },
     {
@@ -279,7 +288,7 @@
       "source_file": "components/NowPlaying.tsx",
       "source_location": "L32",
       "id": "components_nowplaying_load",
-      "community": 3,
+      "community": 4,
       "norm_label": "load()"
     },
     {
@@ -288,7 +297,7 @@
       "source_file": "components/NowPlaying.tsx",
       "source_location": "L76",
       "id": "components_nowplaying_handleclick",
-      "community": 3,
+      "community": 4,
       "norm_label": "handleclick()"
     },
     {
@@ -297,7 +306,7 @@
       "source_file": "components/mdx/Photo.tsx",
       "source_location": "L1",
       "id": "components_mdx_photo_tsx",
-      "community": 20,
+      "community": 19,
       "norm_label": "photo.tsx"
     },
     {
@@ -306,7 +315,7 @@
       "source_file": "components/mdx/components.tsx",
       "source_location": "L1",
       "id": "components_mdx_components_tsx",
-      "community": 21,
+      "community": 20,
       "norm_label": "components.tsx"
     },
     {
@@ -315,7 +324,7 @@
       "source_file": "components/travel/TripGrid.tsx",
       "source_location": "L1",
       "id": "components_travel_tripgrid_tsx",
-      "community": 11,
+      "community": 12,
       "norm_label": "tripgrid.tsx"
     },
     {
@@ -324,7 +333,7 @@
       "source_file": "components/travel/TripGrid.tsx",
       "source_location": "L19",
       "id": "travel_tripgrid_cardstyle",
-      "community": 11,
+      "community": 12,
       "norm_label": "cardstyle()"
     },
     {
@@ -333,7 +342,7 @@
       "source_file": "lib/projects.ts",
       "source_location": "L1",
       "id": "lib_projects_ts",
-      "community": 4,
+      "community": 5,
       "norm_label": "projects.ts"
     },
     {
@@ -342,7 +351,7 @@
       "source_file": "lib/projects.ts",
       "source_location": "L102",
       "id": "lib_projects_getfeaturedprojects",
-      "community": 4,
+      "community": 5,
       "norm_label": "getfeaturedprojects()"
     },
     {
@@ -351,7 +360,7 @@
       "source_file": "lib/projects.ts",
       "source_location": "L114",
       "id": "lib_projects_getwipprojects",
-      "community": 4,
+      "community": 5,
       "norm_label": "getwipprojects()"
     },
     {
@@ -378,7 +387,7 @@
       "source_file": "lib/work.ts",
       "source_location": "L1",
       "id": "lib_work_ts",
-      "community": 22,
+      "community": 21,
       "norm_label": "work.ts"
     },
     {
@@ -403,7 +412,7 @@
       "label": "getSpotifyToken()",
       "file_type": "code",
       "source_file": "lib/widgets.ts",
-      "source_location": "L114",
+      "source_location": "L118",
       "id": "lib_widgets_getspotifytoken",
       "community": 0,
       "norm_label": "getspotifytoken()"
@@ -412,7 +421,7 @@
       "label": "getSpotifyNowPlaying()",
       "file_type": "code",
       "source_file": "lib/widgets.ts",
-      "source_location": "L136",
+      "source_location": "L140",
       "id": "lib_widgets_getspotifynowplaying",
       "community": 0,
       "norm_label": "getspotifynowplaying()"
@@ -423,7 +432,7 @@
       "source_file": "lib/projects-content.ts",
       "source_location": "L1",
       "id": "lib_projects_content_ts",
-      "community": 2,
+      "community": 1,
       "norm_label": "projects-content.ts"
     },
     {
@@ -432,7 +441,7 @@
       "source_file": "lib/projects-content.ts",
       "source_location": "L8",
       "id": "lib_projects_content_getprojectcontent",
-      "community": 2,
+      "community": 1,
       "norm_label": "getprojectcontent()"
     },
     {
@@ -441,7 +450,7 @@
       "source_file": "lib/travel-types.ts",
       "source_location": "L1",
       "id": "lib_travel_types_ts",
-      "community": 23,
+      "community": 22,
       "norm_label": "travel-types.ts"
     },
     {
@@ -450,7 +459,7 @@
       "source_file": "lib/mandarin.ts",
       "source_location": "L1",
       "id": "lib_mandarin_ts",
-      "community": 24,
+      "community": 23,
       "norm_label": "mandarin.ts"
     },
     {
@@ -459,7 +468,7 @@
       "source_file": "lib/travel.ts",
       "source_location": "L1",
       "id": "lib_travel_ts",
-      "community": 1,
+      "community": 2,
       "norm_label": "travel.ts"
     },
     {
@@ -468,7 +477,7 @@
       "source_file": "lib/travel.ts",
       "source_location": "L14",
       "id": "lib_travel_getalltrips",
-      "community": 1,
+      "community": 2,
       "norm_label": "getalltrips()"
     },
     {
@@ -477,7 +486,7 @@
       "source_file": "lib/travel.ts",
       "source_location": "L53",
       "id": "lib_travel_gettrip",
-      "community": 1,
+      "community": 2,
       "norm_label": "gettrip()"
     }
   ],
@@ -492,6 +501,30 @@
       "_tgt": "app_robots_robots",
       "source": "app_robots_ts",
       "target": "app_robots_robots",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "app_layout_tsx",
+      "_tgt": "app_layout_rootlayout",
+      "source": "app_layout_tsx",
+      "target": "app_layout_rootlayout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "app_layout_tsx",
+      "_tgt": "app_layout_footer",
+      "source": "app_layout_tsx",
+      "target": "app_layout_footer",
       "confidence_score": 1.0
     },
     {
@@ -633,8 +666,8 @@
       "source_file": "lib/widgets.ts",
       "source_location": "L78",
       "weight": 1.0,
-      "_src": "lib_widgets_getapplemusicrecentlyplayed",
-      "_tgt": "now_playing_route_get",
+      "_src": "now_playing_route_get",
+      "_tgt": "lib_widgets_getapplemusicrecentlyplayed",
       "source": "now_playing_route_get",
       "target": "lib_widgets_getapplemusicrecentlyplayed"
     },
@@ -777,8 +810,8 @@
       "source_file": "lib/widgets.ts",
       "source_location": "L77",
       "weight": 1.0,
-      "_src": "lib_widgets_getapplemusicrecentlyplayed",
-      "_tgt": "lib_redis_getredis",
+      "_src": "lib_redis_getredis",
+      "_tgt": "lib_widgets_getapplemusicrecentlyplayed",
       "source": "lib_redis_getredis",
       "target": "lib_widgets_getapplemusicrecentlyplayed"
     },
@@ -798,7 +831,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/widgets.ts",
-      "source_location": "L114",
+      "source_location": "L118",
       "weight": 1.0,
       "_src": "lib_widgets_ts",
       "_tgt": "lib_widgets_getspotifytoken",
@@ -810,7 +843,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "lib/widgets.ts",
-      "source_location": "L136",
+      "source_location": "L140",
       "weight": 1.0,
       "_src": "lib_widgets_ts",
       "_tgt": "lib_widgets_getspotifynowplaying",
@@ -822,7 +855,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "lib/widgets.ts",
-      "source_location": "L138",
+      "source_location": "L142",
       "weight": 1.0,
       "_src": "lib_widgets_getspotifynowplaying",
       "_tgt": "lib_widgets_getspotifytoken",

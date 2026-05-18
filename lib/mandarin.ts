@@ -3,7 +3,21 @@ import { getAllTrips } from "@/lib/travel";
 
 const taiwan_trips = getAllTrips().filter(trip => trip.country == "Taiwan").reverse();
 
-const Awards = [
+type award = {
+  title: string;
+  org: string;
+  year: string;
+  slug?: string;
+  image?: string;
+}
+
+const Awards: award[] = [
+  {
+    title: "Second Place - Speech: Foreign Language Learner Category",
+    org: "CLTA-IN - 印州中文教师协会",
+    year: "2026-05",
+    image: "/awards/clta-in-award.pdf",
+  },
   {
     title: "Inducted to National Collegiate Chinese Honor Society",
     org: "CLTA NCCHS - 大学中文荣誉生协会",
