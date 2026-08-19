@@ -44,7 +44,7 @@ export default function HomePage() {
               <span className="mono text-sm text-gray-400">Active T3 Secret Security Clearance</span>
             </div>
             <p className="text-xl text-gray-500 leading-relaxed mb-10">
-              I build things with data. Currently studying Data Science, working on
+              I build things with data. Current Data Engineer @ UNCOMN mapping real life processes to auditable workflow tools. Working on
               database systems and ML pipelines, learning Mandarin, and trying to
               see as much of the world as I can.
             </p>
@@ -84,18 +84,16 @@ export default function HomePage() {
                 See where I've been
               </Link>
             </div>
-            <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p>
-            <ul className="space-y-1.5">
-              {[
-                "learning rust",
-                "making this site - constantly rolling out changes..."
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
-                  <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {/* <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p> */}
+            {/* <ul className="space-y-1.5"> */}
+            {/*   {[ */}
+            {/*   ].map((item) => ( */}
+            {/*     <li key={item} className="flex items-center gap-2 text-sm text-gray-500"> */}
+            {/*       <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" /> */}
+            {/*       {item} */}
+            {/*     </li> */}
+            {/*   ))} */}
+            {/* </ul> */}
           </div>
           {/* Photo */}
           <div className="shrink-0 md:pt-2">
