@@ -19,6 +19,13 @@ export const now = ["Finishing my Data Science degree",
 
 export const experience: Job[] = [
   {
+    role: "Data Engineer",
+    org: "UNCOMN",
+    period: "June 2026 – Present",
+    notes:
+      "Responsible for rapid development of prototypes to aid in winning government contracts.",
+  },
+  {
     role: "Data Engineer Intern",
     org: "US Space Force — Space Launch Delta 45, The Forge",
     period: "June 2025 – August 2026",

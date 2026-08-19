@@ -3,6 +3,7 @@ import Image from "next/image";
 import Awards from "@/lib/mandarin";
 import { getAllTrips } from "@/lib/travel";
 import { getFeaturedProjects } from "@/lib/projects";
+import { AwardsList } from "@/components/AwardsList";
 
 const skills = [
   "Python", "SQL", "TypeScript", "React", "Machine Learning",
@@ -43,7 +44,7 @@ export default function HomePage() {
               <span className="mono text-sm text-gray-400">Active T3 Secret Security Clearance</span>
             </div>
             <p className="text-xl text-gray-500 leading-relaxed mb-10">
-              I build things with data. Currently studying Data Science, working on
+              I build things with data. Current Data Engineer @ UNCOMN mapping real life processes to auditable workflow tools. Working on
               database systems and ML pipelines, learning Mandarin, and trying to
               see as much of the world as I can.
             </p>
@@ -83,18 +84,16 @@ export default function HomePage() {
                 See where I've been
               </Link>
             </div>
-            <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p>
-            <ul className="space-y-1.5">
-              {[
-                "learning rust",
-                "making this site - constantly rolling out changes..."
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-gray-500">
-                  <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            {/* <p className="mono text-xs text-gray-400 mt-4 mb-2">// right now</p> */}
+            {/* <ul className="space-y-1.5"> */}
+            {/*   {[ */}
+            {/*   ].map((item) => ( */}
+            {/*     <li key={item} className="flex items-center gap-2 text-sm text-gray-500"> */}
+            {/*       <span className="w-1 h-1 rounded-full bg-gray-300 shrink-0" /> */}
+            {/*       {item} */}
+            {/*     </li> */}
+            {/*   ))} */}
+            {/* </ul> */}
           </div>
           {/* Photo */}
           <div className="shrink-0 md:pt-2">
@@ -168,37 +167,7 @@ export default function HomePage() {
           I want to read literature (and survive my girlfriends scoldings), not just order
           food. Currently targeting HSK 5.
         </p>
-        <div className="space-y-3">
-          {Awards.map((a) => (
-            <div
-              key={a.title}
-              className="flex items-start gap-4 p-4 rounded-lg border border-gray-100"
-            >
-              <span
-                className="mono text-xs font-medium shrink-0 mt-0.5"
-                style={{ color: "var(--accent)" }}
-              >
-                {a.year}
-              </span>
-              <div>
-                {a.slug ? (
-                  <Link
-                    key={a.slug}
-                    href={`/travel/${a.slug}`}
-                    rel="noopener noreferrer"
-                    className="block text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors"
-                  >
-                    {a.title} ↗
-                  </Link>
-                ) : (
-                  <p className="text-sm font-medium text-gray-900">{a.title}</p>
-
-                )}
-                <p className="text-xs text-gray-500 mt-0.5">{a.org}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <AwardsList awards={Awards} />
       </section>
 
 
